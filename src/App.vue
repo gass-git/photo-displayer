@@ -1,30 +1,32 @@
+<script setup>
+    import AppLayout from './AppLayout.vue'
+</script>
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <AppLayout>
+        <template v-slot:header>
+            
+        </template>    
+        <template v-slot:sidebar>
+            
+        </template>
+        <template v-slot:content>
+            
+        </template>
+    </AppLayout>
 </template>
 
 <style>
+*{
+  box-sizing: border-box;
+}
+body{
+  margin:0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
