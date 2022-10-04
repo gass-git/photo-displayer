@@ -17,6 +17,7 @@
     :root{
         --header-height: 70px;
         --sidebar-width: 250px;
+        --line-color:#cecece;
     }
     #app-wrapper{
         height:100vh;
@@ -27,7 +28,7 @@
         width:100vw;
         display: flex;
         padding:0 0 0 20px;
-        border:1px solid black;
+        border-bottom:1px solid var(--line-color);
     }
     #app-main{
         display:flex;
@@ -36,11 +37,10 @@
     }
     #sidebar{
         width:var(--sidebar-width);
-        border:1px solid black;
+        border-right:1px solid var(--line-color);
     }
     #content{
         width:calc(100vw - var(--sidebar-width));
         height:auto;
-        border:1px solid blue;
     }
 </style>

@@ -5,28 +5,31 @@
     import AlbumBtn from './components/AlbumBtn.vue'
 
     const store = useStore()
-    const photosData = computed(() => store.state.photos.data) 
+    const albumsData = computed(() => store.state.albums.data) 
+    const photos = computed(() => store.state.photos.data)
 
     onMounted(() => {
-        store.dispatch('photos/fetch')    
+        store.dispatch('albums/fetch')    
     })
 </script>
 
 <template>
     <AppLayout>
         <template v-slot:header>
-            
+            <h2>App Name</h2>
         </template>    
         <template v-slot:sidebar>
-            <div v-for="photo in photosData" v-bind:key="photo.id">
+            <div v-for="album in albumsData" v-bind:key="album.id">
                 <AlbumBtn 
-                    v-bind:id="photo.id"
-                    v-bind:album="photo.title" 
+                    v-bind:id="album.id"
+                    v-bind:album="album.title" 
                  />
             </div>
         </template>
         <template v-slot:content>
-            {{ store.getters['photos/selected'] }}
+            <div v-for="photo in photos" v-bind:key="photo.id">
+                <img v-bind:src="photo.url" />
+            </div>
         </template>
     </AppLayout>
 </template>
