@@ -9,16 +9,15 @@ const photos = {
     },
     mutations: {
         updateData(state, data){
-            state.data = data.filter((photo) => photo.id < 10)
+            state.data = data
         }
     },
     actions: { 
-        fetchByAlbum(context, albumId){
-            const API_URL = `https://jsonplaceholder.typicode.com/photos?album=${albumId}`
+        fetchByAlbum(context, {albumId}){
+            let API_URL = `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
 
             axios.get(API_URL).then((resp) => {
                 context.commit('updateData', resp.data)
-                console.log(resp.data)
             })
         }
     },

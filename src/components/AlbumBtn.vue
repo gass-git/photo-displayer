@@ -2,19 +2,17 @@
     import { useStore } from 'vuex'
     import { defineProps } from 'vue'
 
-    const props = defineProps({ id: Number, album: String })
+    const props = defineProps({ albumId: Number, albumTitle: String })
     const store = useStore()
 
     function handleClick(){
-        store.dispatch('albums/changeId', props.id)
-        store.dispatch('photos/fetchByAlbum', props.id)
+        store.dispatch('albums/updateId', {newId: props.albumId})
+        store.dispatch('photos/fetchByAlbum', {albumId: props.albumId})
     }
 </script>
 
 <template>
-    <button v-on:click="handleClick">
-        {{ props.album }}
-    </button>
+    <button @click="handleClick">{{ props.albumTitle }}</button>
 </template>
 
 <style scoped>

@@ -19,16 +19,20 @@
             <h2>App Name</h2>
         </template>    
         <template v-slot:sidebar>
-            <div v-for="album in albumsData" v-bind:key="album.id">
+            <div v-for="album in albumsData" :key="album.id">
                 <AlbumBtn 
-                    v-bind:id="album.id"
-                    v-bind:album="album.title" 
-                 />
+                    :albumId="album.id"
+                    :albumTitle="album.title" 
+                />
             </div>
         </template>
         <template v-slot:content>
-            <div v-for="photo in photos" v-bind:key="photo.id">
-                <img v-bind:src="photo.url" />
+            <div id="content" >
+                <img 
+                    v-for="photo in photos" 
+                    :key="photo.id" 
+                    :src="photo.url" 
+                />
             </div>
         </template>
     </AppLayout>
@@ -46,5 +50,17 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+#content{
+    width: calc(100vw - 300px);
+    display:flex;
+    justify-content: flex-start;
+    flex-flow:row wrap;
+}
+#content > img{
+    height:150px;
+    width:150px;
+    padding:10px;
+    border-radius: 15px;
 }
 </style>

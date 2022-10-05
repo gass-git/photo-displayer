@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const API_URL = 'https://jsonplaceholder.typicode.com/albums'
-
 const albums = {
     namespaced: true,
     state(){
@@ -20,12 +18,14 @@ const albums = {
     },
     actions: {
         fetch(context){
+            let API_URL = 'https://jsonplaceholder.typicode.com/albums'
+
             axios.get(API_URL).then((resp) => {
                 context.commit('updateData', resp.data)
             })
         },
-        changeId(context, id){
-            context.commit('updateCurrentId', id)
+        updateId(context, {newId}){
+            context.commit('updateCurrentId', newId)
         }
     },
     getters: {
