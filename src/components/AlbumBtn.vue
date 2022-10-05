@@ -1,26 +1,36 @@
 <script setup>
-    import { useStore } from 'vuex'
+    //import { useStore } from 'vuex'
     import { defineProps } from 'vue'
 
     const props = defineProps({ albumId: Number, albumTitle: String })
-    const store = useStore()
+    //const store = useStore()
 
+    /*
     function handleClick(){
         store.dispatch('albums/updateId', {newId: props.albumId})
-        store.dispatch('photos/fetchByAlbum', {albumId: props.albumId})
     }
+    */
 </script>
 
 <template>
-    <button @click="handleClick">{{ props.albumTitle }}</button>
+    <router-link v-bind:to="`/photos/${props.albumId}`">
+        {{ props.albumTitle }}
+    </router-link>
 </template>
 
 <style scoped>
-    button{
-        margin:13px 15px 0px 15px;
-        width:calc(100% - 30px);
-        height:40px;
+    a{
+        display:block;
+        width:calc(100% - 20px);
+        padding:10px;
         cursor:pointer;
-        font-size:14px;
+        margin:10px;
+        font-size:16px;
+        border:1px solid black;
+        border-radius:5px;
+        text-decoration: none;
+    }
+    a:hover{
+        background:rgb(246, 246, 246);
     }
 </style>
