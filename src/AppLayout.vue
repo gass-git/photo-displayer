@@ -22,6 +22,7 @@
         --line-color:#c0c0c0;
         --header-padding:5px 0 5px 30px;
         --light-gray:#ededed;
+        --sidebar-right-margin:20px;
     }
     #app-wrapper{
         height: auto;
@@ -40,7 +41,7 @@
     }
     #sidebar-container{
         padding: 20px;
-        margin-right:20px;
+        margin-right:var(--sidebar-right-margin);
         width:var(--sidebar-width);
         background: var(--light-gray);
     }

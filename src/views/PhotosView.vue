@@ -84,7 +84,7 @@ body{
     text-transform: capitalize;
 }
 #content{
-    width: calc(100vw - 300px);
+    width: calc(100vw - var(--sidebar-width) - var(--sidebar-right-margin));
     display:flex;
     justify-content: flex-start;
     flex-flow:row wrap;
