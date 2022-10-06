@@ -9,7 +9,7 @@
 
     watchEffect(() => {
         let currentId = route.params.albumId
-        store.dispatch('photos/fetchByAlbum', {albumId: currentId})
+        store.dispatch('photos/showByAlbum', {albumId: currentId})
     })
 </script>
 
