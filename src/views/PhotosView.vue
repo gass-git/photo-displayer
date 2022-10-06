@@ -19,6 +19,7 @@
         <template v-slot:sidebar-header>
             <div id="sidebar-header">
                 📸 <span>Photo Displayer</span>
+                <br>
             </div>
         </template>    
         <template v-slot:sidebar-content>
@@ -33,12 +34,20 @@
 
         <!-- content -->
         <template v-slot:content-header>
-            <div id="content-header">
-                <div>Current album − id #{{store.state.albums.currentId}}</div>
-                <div>
-                    {{ store.getters['albums/title'] }} 
-                </div>     
-            </div>
+            <section id="content-header">
+                <section id="left">
+                    <div>Current album − id #{{store.state.albums.currentId}}
+                    </div>
+                    <div>
+                        {{ store.getters['albums/title'] }} 
+                    </div>
+                </section>
+                <section id="right">
+                    <router-link to="/">
+                        Go Home
+                    </router-link>
+                </section>
+            </section>
         </template>
         <template v-slot:content>
             <div id="content" >
@@ -71,8 +80,10 @@ body{
     margin-left:7px;
 }
 #content-header{
+    display: flex;
     height:75px;
     margin-left:10px;
+    justify-content: space-between;
 }
 #content-header div:nth-child(1){
     margin:25px 0 0 0;
@@ -84,6 +95,19 @@ body{
     font-size:16px;
     font-style: italic;
     text-transform: capitalize;
+}
+#content-header #right{
+    display: grid;
+    place-items: center;
+    width:100px;
+    
+    /*border:1px solid black;*/
+}
+#content-header #right a{
+    text-decoration: none;
+}
+#content-header #right a:hover{
+    text-decoration: underline;
 }
 #content{
     width: calc(100vw - var(--sidebar-width) - var(--sidebar-right-margin));
