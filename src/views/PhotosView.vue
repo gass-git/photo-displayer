@@ -24,8 +24,9 @@
         <template v-slot:sidebar-content>
             <div v-for="album in albumsData" :key="album.id">
                 <AlbumButton
-                    :albumId="album.id"
-                    :albumTitle="album.title" 
+                    v-bind:albumId="album.id"
+                    v-bind:albumTitle="album.title" 
+                    v-bind:selected="true"
                 />
             </div>
         </template>
@@ -70,7 +71,6 @@ body{
 #content-header{
     height:75px;
     margin-left:10px;
-    /*border:1px solid black;*/
 }
 #content-header div:nth-child(1){
     margin:25px 0 0 0;
