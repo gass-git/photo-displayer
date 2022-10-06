@@ -21,8 +21,17 @@
                 📸 <span>Photo Displayer</span>
                 <br>
             </div>
+            <router-link to="/">
+                <div id="home-btn">
+                    <img id="home-svg" src="@/assets/home.svg" />
+                    <div id="text">
+                        Go Back Home
+                    </div>
+                </div>    
+            </router-link>
         </template>    
         <template v-slot:sidebar-content>
+            <div id="sidebar-subtitle">Albums</div>
             <div v-for="album in albumsData" :key="album.id">
                 <AlbumButton
                     v-bind:albumId="album.id"
@@ -43,9 +52,7 @@
                     </div>
                 </section>
                 <section id="right">
-                    <router-link to="/">
-                        Go Home
-                    </router-link>
+                    
                 </section>
             </section>
         </template>
@@ -103,11 +110,36 @@ body{
     
     /*border:1px solid black;*/
 }
-#content-header #right a{
+a{
     text-decoration: none;
 }
-#content-header #right a:hover{
-    text-decoration: underline;
+#home-svg{
+    width:30px;
+    color:#525252;
+}
+#home-btn{
+    padding:10px;
+    display: flex;
+    align-items: center;
+    background:white;
+    margin:0 0 15px 0;
+    border-radius:5px;
+}
+#home-btn #text{
+    margin:0 0 0 15px;
+    color:#525252;
+}
+#home-btn:hover{
+    box-shadow:inset 0px 0px 0px 2px #455f87;
+    background:#b3cff8;
+}
+#sidebar-subtitle{
+    display:grid;
+    place-items:center;
+    border-top:1px solid grey;
+    border-bottom:1px solid grey;
+    padding:10px 5px 10px 5px;
+    margin-bottom:20px;
 }
 #content{
     width: calc(100vw - var(--sidebar-width) - var(--sidebar-right-margin));

@@ -21,7 +21,7 @@ const albums = {
             let API_URL = 'https://jsonplaceholder.typicode.com/albums'
 
             axios.get(API_URL).then((resp) => {
-                context.commit('updateData', resp.data)
+                context.commit('updateData', resp.data.filter((album) => album.id < 30))
             })
         },
         updateId(context, {newId}){
