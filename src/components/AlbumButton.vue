@@ -21,16 +21,19 @@
 <style scoped>
     a{
         display:block;
-        width:calc(100% - 20px);
+        width:auto;
         padding:10px;
+        margin-bottom:12px;
         cursor:pointer;
-        margin:10px;
         font-size:16px;
-        border:1px solid black;
         border-radius:5px;
+        background: white;
         text-decoration: none;
+        text-transform: capitalize;
+        color:#525252;
     }
     a:hover{
-        background:rgb(246, 246, 246);
+        background:#5F9DF7;
+        color:white;
     }
 </style>

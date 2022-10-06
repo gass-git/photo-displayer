@@ -2,7 +2,7 @@
     import { onMounted, computed } from '@vue/runtime-core'
     import AppLayout from '../AppLayout.vue'
     import {useStore} from 'vuex'
-    import AlbumBtn from '../components/AlbumBtn.vue'
+    import AlbumButton from '@/components/AlbumButton.vue'
 
     const store = useStore()
     const albumsData = computed(() => store.state.albums.data) 
@@ -14,15 +14,27 @@
 
 <template>
     <AppLayout>
-        <template v-slot:header>
-            <h2>App Name</h2>
+
+        <!-- sidebar -->
+        <template v-slot:sidebar-header>
+            <div id="sidebar-header">
+                📸 <span>Photo Displayer</span>
+            </div>
         </template>    
-        <template v-slot:sidebar>
+        <template v-slot:sidebar-content>
             <div v-for="album in albumsData" :key="album.id">
-                <AlbumBtn 
+                <AlbumButton
                     :albumId="album.id"
                     :albumTitle="album.title" 
                 />
+            </div>
+        </template>
+
+        <!-- content -->
+        <template v-slot:content-header>
+            <div id="content-header">
+                <div>Current album</div>
+                <div>{{ store.getters['albums/title'] }}</div>     
             </div>
         </template>
         <template v-slot:content>
@@ -30,6 +42,7 @@
                 <router-view/>
             </div>
         </template>
+
     </AppLayout>
 </template>
 
@@ -46,16 +59,34 @@ body{
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+#sidebar-header{
+    height:100px;
+    padding:20px 0 0 10px;
+    font-size:24px;
+}
+#sidebar-header span{
+    margin-left:7px;
+}
+#content-header{
+    height:75px;
+    margin-left:10px;
+    /*border:1px solid black;*/
+}
+#content-header div:nth-child(1){
+    margin:25px 0 0 0;
+    font-size:16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#content-header div:nth-child(2){
+    font-size:16px;
+    font-style: italic;
+    text-transform: capitalize;
+}
 #content{
     width: calc(100vw - 300px);
     display:flex;
     justify-content: flex-start;
     flex-flow:row wrap;
-}
-#content > img{
-    height:150px;
-    width:150px;
-    padding:10px;
-    border-radius: 15px;
 }
 </style>

@@ -1,13 +1,16 @@
 <template>
     <section id="app-wrapper">
 
-        <!-- header -->
-        <div id="app-header"><slot name="header" /></div>
-
         <!-- main -->
         <section id="app-main">
-            <div id="sidebar"><slot name="sidebar" /></div>
-            <div id="content"><slot name="content" /></div>
+            <div id="sidebar-container">
+                <slot name="sidebar-header" />
+                <slot name="sidebar-content" />
+            </div>
+            <div id="content-container">
+                <slot name="content-header" />
+                <slot name="content" />
+            </div>
         </section>
 
     </section>
@@ -15,32 +18,35 @@
 
 <style>
     :root{
-        --header-height: 70px;
-        --sidebar-width: 250px;
-        --line-color:#cecece;
+        --sidebar-width: 320px;
+        --line-color:#c0c0c0;
+        --header-padding:5px 0 5px 30px;
+        --light-gray:#ededed;
     }
     #app-wrapper{
-        height:100vh;
-        width: 100vh;
+        height: auto;
     }
     #app-header{
-        height:var(--header-height);
-        width:100vw;
+        width:auto;
         display: flex;
-        padding:0 0 0 20px;
-        border-bottom:1px solid var(--line-color);
+        padding:var(--header-padding);
+        background: var(--light-gray);
     }
     #app-main{
         display:flex;
-        width:100vw;
-        height:calc(100vh - var(--header-height));
+        width:auto;
+        height:fit-content;
+        background:var(--app-main-bg);
     }
-    #sidebar{
+    #sidebar-container{
+        padding: 20px;
+        margin-right:20px;
         width:var(--sidebar-width);
-        border-right:1px solid var(--line-color);
+        background: var(--light-gray);
     }
-    #content{
+    #content-container{
         width:calc(100vw - var(--sidebar-width));
         height:auto;
+        padding:10px;
     }
 </style>
