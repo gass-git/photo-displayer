@@ -34,8 +34,10 @@
         <!-- content -->
         <template v-slot:content-header>
             <div id="content-header">
-                <div>Current album</div>
-                <div>{{ store.getters['albums/title'] }}</div>     
+                <div>Current album − id #{{store.state.albums.currentId}}</div>
+                <div>
+                    {{ store.getters['albums/title'] }} 
+                </div>     
             </div>
         </template>
         <template v-slot:content>
