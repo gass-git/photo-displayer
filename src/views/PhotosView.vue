@@ -1,15 +1,11 @@
 <script setup>
-    import { onMounted, computed } from '@vue/runtime-core'
+    import { computed } from '@vue/runtime-core'
     import AppLayout from '../AppLayout.vue'
     import {useStore} from 'vuex'
     import AlbumButton from '@/components/AlbumButton.vue'
 
     const store = useStore()
     const albumsData = computed(() => store.state.albums.data) 
-
-    onMounted(() => {
-        store.dispatch('albums/fetch')    
-    })
 </script>
 
 <template>

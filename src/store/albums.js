@@ -5,7 +5,8 @@ const albums = {
     state(){
         return {
             data:[],
-            currentId: 1
+            currentId: 1,
+            fetched: false
         }
     },
     mutations: {
@@ -22,6 +23,7 @@ const albums = {
 
             axios.get(API_URL).then((resp) => {
                 context.commit('updateData', resp.data.filter((album) => album.id < 30))
+                context.state.fetched = true
             })
         },
         updateId(context, {newId}){
