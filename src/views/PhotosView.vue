@@ -130,8 +130,8 @@ a{
     color:#525252;
 }
 #home-btn:hover{
-    box-shadow:inset 0px 0px 0px 2px #455f87;
-    background:#b3cff8;
+    box-shadow:inset 0px 0px 0px 1px #6e9ce0;
+        background:#c4dbfd;
 }
 #sidebar-subtitle{
     display:grid;

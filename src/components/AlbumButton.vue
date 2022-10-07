@@ -44,11 +44,11 @@
         color:#525252;
     }
     div .blue-bg{
-        box-shadow:inset 0px 0px 0px 2px #455f87;
+        box-shadow:inset 0px 0px 0px 1px #6e9ce0;
         background:#cee2ff;
     }
     div:hover{
-        box-shadow:inset 0px 0px 0px 2px #455f87;
-        background:#b3cff8;
+        box-shadow:inset 0px 0px 0px 1px #6e9ce0;
+        background:#c4dbfd;
     }
 </style>
