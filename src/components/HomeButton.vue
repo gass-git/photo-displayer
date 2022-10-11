@@ -8,7 +8,7 @@
     </router-link>
 </template>
 
-<style>
+<style scoped>
     #home-btn{
         padding:10px;
         display: flex;

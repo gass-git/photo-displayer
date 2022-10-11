@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     #sidebar-header{
         height:100px;
         padding:20px 0 0 10px;
