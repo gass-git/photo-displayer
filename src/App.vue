@@ -3,8 +3,6 @@
     import {useStore} from 'vuex'
     import AppLayout from '@/layouts/AppLayout.vue'
     import AppName from '@/components/AppName.vue'
-    import HomeButton from '@/components/HomeButton.vue'
-    import MenuTitle from '@/components/MenuTitle.vue'
     import MenuOptions from '@/components/MenuOptions.vue'
 
     const store = useStore()
@@ -19,11 +17,9 @@
 
         <template v-slot:sidebar-header>
             <AppName />
-            <HomeButton />
         </template>
         
         <template v-slot:sidebar-content>
-            <MenuTitle name="Albums"/>
             <MenuOptions />
         </template>
 
@@ -37,13 +33,10 @@
 </template>
 
 <style>
-
 #content{
-    width: calc(100vw - var(--sidebar-width) - var(--sidebar-right-margin));
+    width:100%;
     display:flex;
     justify-content: flex-start;
     flex-flow:row wrap;
 }
-
-
 </style>

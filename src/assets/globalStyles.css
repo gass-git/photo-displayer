@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+:root{
+    --sidebar-width: 290px;
+    --line-color:#c0c0c0;
+    --header-padding:5px 0 5px 30px;
+    --light-gray:#ededed;
+    --dark-navy:#002E94;
+    --sidebar-right-margin:20px;
+}
+*{
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif; 
+}
+body{
+    margin:0;
+    background:#f3f3f3;
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+

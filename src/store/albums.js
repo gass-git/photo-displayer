@@ -33,7 +33,8 @@ const albums = {
     getters: {
         title(state){
             if(state.data.length > 0){
-                return state.data[state.currentId].title
+                let album = state.data.find((album) => album.id == state.currentId)
+                return album.title
             }
             else{
                 return 'no album selected'
