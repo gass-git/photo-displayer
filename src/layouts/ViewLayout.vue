@@ -13,9 +13,13 @@
     #wrapper{
         width: 100%;
         height: auto;
-        border:1px solid black;
     }
     #header{
-        height: auto;
+        display: flex;
+        padding:0 0 0 12px;
+        align-items: center;
+        height: 80px;
+        font-size:20px;
+        text-transform: capitalize;
     }
 </style>

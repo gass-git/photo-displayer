@@ -31,9 +31,6 @@ const albums = {
         }
     },
     getters: {
-        selected(state){
-            return state.data.find((album) => album.id === state.currentId)
-        },
         title(state){
             if(state.data.length > 0){
                 return state.data[state.currentId].title

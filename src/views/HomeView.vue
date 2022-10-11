@@ -1,5 +1,5 @@
 <script setup> 
-    import ViewLayout from '@/assets/ViewLayout.vue'
+    import ViewLayout from '@/layouts/ViewLayout.vue'
 </script>
 
 <template>

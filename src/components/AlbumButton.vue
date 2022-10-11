@@ -32,16 +32,13 @@
         cursor:pointer;
         font-size:16px;
         border-radius:5px;
-        background: white;
         text-transform: capitalize;
-        color:#525252;
+        color:var(--light-gray);
     }
     .blue-bg{
         box-shadow:inset 0px 0px 0px 1px #6e9ce0;
-        background:#cee2ff;
     }
     div:hover{
         box-shadow:inset 0px 0px 0px 1px #6e9ce0;
-        background:#c4dbfd;
     }
 </style>

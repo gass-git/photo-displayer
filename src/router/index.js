@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AlbumPhoto from '../components/AlbumPhoto.vue'
 import HomeView from '@/views/HomeView.vue'
 import PhotosView from '@/views/PhotosView.vue'
 
@@ -17,7 +16,7 @@ const routes = [
         children:[
             {
                 path:':albumId',
-                component: AlbumPhoto
+                component: PhotosView
             }
         ]
     }

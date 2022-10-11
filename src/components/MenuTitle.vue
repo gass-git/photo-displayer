@@ -18,5 +18,6 @@
         border-bottom:1px solid grey;
         padding:10px 5px 10px 5px;
         margin-bottom:20px;
+        color:var(--light-gray);
     }
 </style>

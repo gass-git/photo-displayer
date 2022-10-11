@@ -1,7 +1,7 @@
 <script setup>
     import {onMounted} from 'vue'
     import {useStore} from 'vuex'
-    import AppLayout from '@/assets/AppLayout.vue'
+    import AppLayout from '@/layouts/AppLayout.vue'
     import AppName from '@/components/AppName.vue'
     import HomeButton from '@/components/HomeButton.vue'
     import MenuTitle from '@/components/MenuTitle.vue'
