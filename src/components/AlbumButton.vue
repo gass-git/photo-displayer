@@ -4,14 +4,14 @@
 
     const route = useRoute()
     const props = defineProps({ albumId: Number, albumTitle: String })
-
-    const selected_ID = computed(() => Number(route.params.albumId))
-    const isSelected = computed(() => props.albumId === selected_ID.value)
+    
+    const isSelected = computed(() => props.albumId == route.params.albumId)
+    const path = computed(() => '/photos/' + props.albumId)
 </script>
 
 <template>
-    <router-link :to="`/photos/${props.albumId}`">
-        <div v-if="isSelected" class="blue-bg">
+    <router-link :to="path">
+        <div v-if="isSelected" class="selected">
             {{ props.albumTitle }}
         </div>
         <div v-else>
@@ -35,10 +35,10 @@
         text-transform: capitalize;
         color:var(--light-gray);
     }
-    .blue-bg{
+    .selected{
         box-shadow:inset 0px 0px 0px 1px #6e9ce0;
     }
     div:hover{
         box-shadow:inset 0px 0px 0px 1px #6e9ce0;
     }
-</style>
+</style> 

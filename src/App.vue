@@ -15,7 +15,7 @@
 <template>
     <AppLayout>
         <template v-slot:sidebar-header>
-            <AppName />
+            <AppName name="photo displayer"/>
         </template>
         
         <template v-slot:sidebar-body>
