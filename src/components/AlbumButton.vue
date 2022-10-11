@@ -1,23 +1,16 @@
 <script setup>
-    import { defineProps, computed } from 'vue'
-    import { useStore } from 'vuex'
+    import { defineProps, computed} from 'vue'
+    import { useRoute } from 'vue-router'
 
-    const store = useStore()
-    const props = defineProps({ 
-        albumId: Number, 
-        albumTitle: String
-    })
+    const route = useRoute()
+    const props = defineProps({ albumId: Number, albumTitle: String })
 
-    // current selected album id
-    const selectedAlbumId = computed(() => Number(store.state.albums.currentId))
-
-    // is the album button selected ?
-    const isSelected = computed(() => props.albumId === selectedAlbumId.value)
-
+    const selected_ID = computed(() => Number(route.params.albumId))
+    const isSelected = computed(() => props.albumId === selected_ID.value)
 </script>
 
 <template>
-    <router-link v-bind:to="`/photos/${props.albumId}`">
+    <router-link :to="`/photos/${props.albumId}`">
         <div v-if="isSelected" class="blue-bg">
             {{ props.albumTitle }}
         </div>
@@ -35,7 +28,7 @@
         display:block;
         width:auto;
         padding:10px;
-        margin-bottom:12px;
+        margin:0 0 12px 0;
         cursor:pointer;
         font-size:16px;
         border-radius:5px;
@@ -43,7 +36,7 @@
         text-transform: capitalize;
         color:#525252;
     }
-    div .blue-bg{
+    .blue-bg{
         box-shadow:inset 0px 0px 0px 1px #6e9ce0;
         background:#cee2ff;
     }

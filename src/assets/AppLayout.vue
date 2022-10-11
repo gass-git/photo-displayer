@@ -17,6 +17,12 @@
 </template>
 
 <style>
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        margin:0;
+    }
     :root{
         --sidebar-width: 320px;
         --line-color:#c0c0c0;
@@ -36,6 +42,7 @@
     #app-main{
         display:flex;
         width:auto;
+        min-height: 100vh;
         height:fit-content;
         background:var(--app-main-bg);
     }

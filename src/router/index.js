@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PhotosView from '../views/PhotosView.vue'
-import HomeView from '../views/HomeView.vue'
 import AlbumPhoto from '../components/AlbumPhoto.vue'
+import HomeView from '@/views/HomeView.vue'
+import PhotosView from '@/views/PhotosView.vue'
 
 const routes = [
     {
