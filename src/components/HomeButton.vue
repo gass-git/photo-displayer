@@ -1,34 +1,28 @@
 <template>
     <router-link to="/">
-        <div id="home-btn">
-            <div id="text">
-                Home
-            </div>
-        </div>    
+        <div id="home-link-wrapper">
+            <span class="material-symbols-outlined">
+                home
+            </span>
+        </div>
     </router-link>
 </template>
 
 <style scoped>
-    #home-btn{
-        padding:10px;
-        display: flex;
-        align-items: center;
-        margin:0 0 15px 0;
-    }
-#home-btn #text{
-    cursor: pointer;
-    margin:0 0 0 15px;
-    color:var(--light-gray);
-}
-#home-btn #text:hover{
-    color:white;
-}
 a{
-    cursor:default;
     text-decoration: none;
 }
-#home-svg{
-    width:30px;
-    color:#525252;
+#home-link-wrapper{
+    display:grid;
+    place-items: center;
+    aspect-ratio: 1;
+    height:60px;
+    border-left:1px solid #e0e0e0;
+    border-bottom:1px solid #e0e0e0;
+    cursor:pointer;
+    color:rgb(86, 86, 86);
+}
+#home-link-wrapper:hover{
+    background:#fafafe;
 }
 </style>

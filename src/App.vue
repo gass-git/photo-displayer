@@ -14,29 +14,16 @@
 
 <template>
     <AppLayout>
-
         <template v-slot:sidebar-header>
             <AppName />
         </template>
         
-        <template v-slot:sidebar-content>
+        <template v-slot:sidebar-body>
             <MenuOptions />
         </template>
 
-        <template v-slot:content>
-            <div id="content">
-                <router-view />
-            </div>
+        <template v-slot:right-content>
+            <router-view />
         </template>
-        
     </AppLayout>
 </template>
-
-<style>
-#content{
-    width:100%;
-    display:flex;
-    justify-content: flex-start;
-    flex-flow:row wrap;
-}
-</style>

@@ -5,11 +5,10 @@
         <section id="app-main">
             <div id="sidebar-container">
                 <slot name="sidebar-header" />
-                <slot name="sidebar-content" />
+                <slot name="sidebar-body" />
             </div>
-            <div id="content-container">
-                <slot name="content-header" />
-                <slot name="content" />
+            <div id="right-content-container">
+                <slot name="right-content" />
             </div>
         </section>
 
@@ -37,7 +36,7 @@
         width:var(--sidebar-width);
         background: var(--dark-navy);
     }
-    #content-container{
+    #right-content-container{
         width:calc(100vw - var(--sidebar-width));
         height:auto;
     }
