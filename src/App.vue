@@ -3,7 +3,7 @@
     import {useStore} from 'vuex'
     import AppLayout from '@/layouts/AppLayout.vue'
     import AppName from '@/components/AppName.vue'
-    import MenuOptions from '@/components/MenuOptions.vue'
+    import MenuOptions from '@/components/menuOptions/MenuOptions.vue'
 
     const store = useStore()
 

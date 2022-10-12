@@ -5,7 +5,7 @@
 <template>
     <ViewLayout>
         <template v-slot:header-content>
-            this is home view
+            Home
         </template>
     </ViewLayout>
 </template>

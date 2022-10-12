@@ -1,7 +1,7 @@
 <script setup>
     import {computed} from 'vue'
     import {useStore} from 'vuex'
-    import AlbumButton from '@/components/AlbumButton.vue'
+    import AlbumButton from '@/components/menuOptions/children/AlbumButton.vue'
 
     const store = useStore()  
     const albums = computed(() => store.state.albums.data)

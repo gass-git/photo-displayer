@@ -1,12 +1,17 @@
 <script setup>
-    import HomeButton from '@/components/HomeButton.vue'
+    import HomeButton from '@/components/buttons/HomeButton.vue'
+    import PhotosButton from '@/components/buttons/PhotosButton.vue'
+
 </script>
 
 <template>
     <section id="wrapper">
         <div id="header">
             <slot name="header-content" />
-            <HomeButton />
+            <div id="right-icons-wrapper">
+                <PhotosButton />
+                <HomeButton />
+            </div>     
         </div>
         <div id="main">
             <slot name="main-content" />
@@ -21,9 +26,9 @@
 }
 #header{
     display: flex;
-    justify-content: space-between;
     padding:0 0 0 35px;
     align-items: center;
+    justify-content: space-between;
     height: 60px;
     font-size:20px;
     text-transform: capitalize;
@@ -32,5 +37,10 @@
 }
 #main{
     padding:20px 0 0 25px;
+}
+#right-icons-wrapper{
+    display:flex;
+    width:auto;
+    height:auto;
 }
 </style>
