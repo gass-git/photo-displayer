@@ -3,12 +3,15 @@
     import {useStore} from 'vuex'
     import AlbumButton from '@/components/menuOptions/children/AlbumButton.vue'
 
-    const store = useStore()  
-    const albums = computed(() => store.state.albums.data)
+    const store = useStore() 
+    const maxAlbums = computed(() => store.state.albums.max)
+    const allAlbums = computed(() => store.state.albums.data)
+    const albumsToShow = computed(() => allAlbums.value.slice(0,maxAlbums.value))
+
 </script>
 
 <template>
-    <div v-for="album in albums" :key="album.id">
+    <div v-for="album in albumsToShow" :key="album.id">
         <AlbumButton
             :albumId="album.id"
             :albumTitle="album.title" 

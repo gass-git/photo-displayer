@@ -6,7 +6,8 @@ const albums = {
         return {
             data:[],
             currentId: 1,
-            fetched: false
+            fetched: false,
+            max: 20
         }
     },
     mutations: {
@@ -15,6 +16,9 @@ const albums = {
         },
         updateCurrentId(state, id){
             state.currentId = id
+        },
+        updateMax(state, n){
+            state.max = n
         }
     },
     actions: {
@@ -22,12 +26,15 @@ const albums = {
             let API_URL = 'https://jsonplaceholder.typicode.com/albums'
 
             axios.get(API_URL).then((resp) => {
-                context.commit('updateData', resp.data.filter((album) => album.id < 30))
+                context.commit('updateData', resp.data)
                 context.state.fetched = true
             })
         },
         updateId(context, {newId}){
             context.commit('updateCurrentId', newId)
+        },
+        updateCurrentMax(context, n){
+            context.commit('updateMax', n)
         }
     },
     getters: {

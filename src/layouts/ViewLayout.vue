@@ -36,7 +36,7 @@
     border-bottom:1px solid #e0e0e0;
 }
 #main{
-    padding:20px 0 0 25px;
+    padding:20px 20px 0 25px;
 }
 #right-icons-wrapper{
     display:flex;
