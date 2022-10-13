@@ -46,6 +46,9 @@ const albums = {
             else{
                 return 'no album selected'
             }
+        },
+        max(state){
+            return state.max
         }
     }
 }
