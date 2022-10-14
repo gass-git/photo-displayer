@@ -9,6 +9,7 @@
 
     onMounted(() => {
         store.dispatch('albums/fetch')
+        store.dispatch('photos/fetchFavorites')
     })
 </script>
 

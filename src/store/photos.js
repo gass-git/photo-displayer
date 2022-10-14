@@ -1,11 +1,14 @@
 import axios from 'axios'
+import {collection, getDocs} from 'firebase/firestore'
+import db from '@/firebase/config.js'
 
 const photos = {
     namespaced: true,
     state(){
         return {
             data: [],
-            cache: {}
+            cache: {},
+            favorites: []
         }
     },
     mutations: {
@@ -14,6 +17,9 @@ const photos = {
 
             // add data to cache only if it has not been added before
             if(!(albumId in state.cache)) state.cache[albumId] = data;
+        },
+        updateFavorites(state, data){
+            state.favorites = data
         }
     },
     actions: { 
@@ -36,10 +42,20 @@ const photos = {
                     context.commit('updateData', {data: resp.data, albumId})
                 })
             }
+        },
+        async fetchFavorites(){
+            try{
+                let snapshot = await getDocs(collection(db, 'favorites'))
+                
+                snapshot.docs.forEach((doc) => console.log(doc.data()))
+            }
+            catch(error){
+                console.log(error)
+            }
         }
     },
     getters: {
-
+               
     }
 }
 
