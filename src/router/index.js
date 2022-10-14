@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import PhotosView from '@/views/PhotosView.vue'
+import CreateAccView from '@/views/CreateAccView.vue'
 
 const routes = [
     {
@@ -19,7 +20,12 @@ const routes = [
                 component: PhotosView
             }
         ]
-    }
+    },
+    {
+        path:'/create-account',
+        name:'create account',
+        component: CreateAccView
+    }    
 ]
 
 const router = createRouter({

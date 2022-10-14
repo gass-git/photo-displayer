@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {collection, getDocs} from 'firebase/firestore'
-import db from '@/firebase/config.js'
+import {db} from '@/firebase/config.js'
 
 const photos = {
     namespaced: true,
