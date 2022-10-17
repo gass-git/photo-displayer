@@ -5,29 +5,17 @@
 
     const store = useStore()
     const [email, password, repeatedPassword] = [ref(''), ref(''), ref('')]
+    const alert = ref({show: false, text: ''})
 
-    const message = computed(() => {
-        if(
-            password.value === repeatedPassword.value 
-            && 
-            password.value !== ''
-            && 
-            password.value.length >= 6
-        ){
-            return 'All inputs are correct'
-        }
-        else if(
-            password.value === repeatedPassword.value 
-            && 
-            password.value !== ''
-        ){
-            return 'The password should be at least 6 characters long'     
-        }
-        else return ''
+    const emailValid = computed(() => {
+        // eslint-disable-next-line
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)
     })
 
     const conditionsAreMet = computed(() => {
         if(
+            emailValid.value
+            &&
             password.value === repeatedPassword.value 
             && 
             password.value !== ''
@@ -42,15 +30,38 @@
     })
 
     function handleSubmit(){
-        if(
-            password.value === repeatedPassword.value 
+        if(conditionsAreMet.value){
+            let credentials = {email: email.value, password: password.value}
+            store.dispatch('authModule/registerUser', credentials)
+        }
+        else if(email.value === ''){
+            alert.value.show = true
+            alert.value.text = 'Please enter an email address'
+        }
+        else if(emailValid.value === false){
+            alert.value.show = true
+            alert.value.text = 'The email address is not valid'
+        }
+        else if(
+            password.value !== repeatedPassword.value 
             && 
             password.value !== ''
             && 
             password.value.length >= 6
         ){
-            let credentials = {email: email.value, password: password.value}
-            store.dispatch('authModule/registerUser', credentials)
+            alert.value.show = true
+            alert.value.text = 'The repeated password is not correct'
+        }
+        else if(
+            password.value === repeatedPassword.value 
+            && 
+            password.value !== ''
+        ){
+            alert.value.show = true
+            alert.value.text = 'The password should be at least 6 characters long'     
+        }
+        else{
+            alert.value.show = false
         }
     }
 
@@ -69,11 +80,8 @@
                 <label>repeat password:</label> <input v-model="repeatedPassword"  type="password" />
                 
                 <div class="msg-container">
-                    <span v-if="conditionsAreMet" class="green">
-                        {{message}}
-                    </span>
-                    <span v-else class="red">
-                        {{message}}
+                    <span v-if="alert.show" class="red">
+                        {{alert.text}}
                     </span>
                 </div>
 

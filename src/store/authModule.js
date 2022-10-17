@@ -1,23 +1,21 @@
 import { auth } from '@/firebase/config.js'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import router from '@/router/index.js'
 
 const authModule = {
     namespaced: true,
     state(){
         return {
-            email:'',
-            password:''
+            userData:{}    
         }
     },
     mutations:{
-        updateCredentials(state, credentials){
-            state.email = credentials.email
-            state.password = credentials.password
+        updateUserData(state, data){
+            state.userData = data
         }
     },
     actions:{
         registerUser(context, credentials){
-
             /* eslint-disable */
             createUserWithEmailAndPassword(
                 auth, 
@@ -25,7 +23,9 @@ const authModule = {
                 credentials.password
             )
             .then((userCredential) => {
-                const user = userCredential.user
+                const userData = userCredential.user
+                context.commit('updateUserData', userData)
+                router.push('/home')
             })
             .catch((error) => {
                 const errorCode = error.code
@@ -34,6 +34,16 @@ const authModule = {
                 console.log(errorCode)
             })
             /* eslint-enable */
+        },
+        loginUser(context, credentials){
+            signInWithEmailAndPassword(auth, credentials.email, credentials.password)
+            .then((userCredential) => {
+                const user = userCredential.user
+                console.log(user)
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
         }
     }
 }
