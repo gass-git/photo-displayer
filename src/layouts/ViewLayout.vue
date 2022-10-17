@@ -1,7 +1,13 @@
 <script setup>
     import HomeButton from '@/components/buttons/HomeButton.vue'
     import PhotosButton from '@/components/buttons/PhotosButton.vue'
+    import {useStore} from 'vuex'
 
+    const store = useStore()
+
+    function handleLogout(){
+        store.dispatch('authModule/logoutUser')
+    }
 </script>
 
 <template>
@@ -9,6 +15,9 @@
         <div id="header">
             <slot name="header-content" />
             <div id="right-icons-wrapper">
+                <div v-if="store.state.authModule.userData">
+                    <button @click="handleLogout">logout</button>                    
+                </div>
                 <PhotosButton />
                 <HomeButton />
             </div>     

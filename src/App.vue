@@ -10,6 +10,7 @@
     onMounted(() => {
         store.dispatch('albums/fetch')
         store.dispatch('photos/fetchFavorites')
+        store.dispatch('authModule/init')
     })
 </script>
 
