@@ -46,8 +46,8 @@ const photos = {
         async fetchFavorites(){
             try{
                 let snapshot = await getDocs(collection(db, 'favorites'))
-                
-                snapshot.docs.forEach((doc) => console.log(doc.data()))
+                // eslint-disable-next-line
+                snapshot.docs.forEach((doc) => null)
             }
             catch(error){
                 console.log(error)

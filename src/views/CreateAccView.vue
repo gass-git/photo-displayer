@@ -3,35 +3,55 @@
     import {ref, computed} from 'vue'
     import {useStore} from 'vuex'
 
-    const email = ref('')
-    const password = ref('')
-    const repeatedPassword = ref('')
     const store = useStore()
+    const [email, password, repeatedPassword] = [ref(''), ref(''), ref('')]
 
     const message = computed(() => {
-        if(password.value === repeatedPassword.value && password.value !== ''){
-            return 'Password inputs match!'
+        if(
+            password.value === repeatedPassword.value 
+            && 
+            password.value !== ''
+            && 
+            password.value.length >= 6
+        ){
+            return 'All inputs are correct'
         }
-        else if(password.value !== ''){
-            return 'Password inputs do not match'     
+        else if(
+            password.value === repeatedPassword.value 
+            && 
+            password.value !== ''
+        ){
+            return 'The password should be at least 6 characters long'     
         }
         else return ''
     })
 
-    const match = computed(() => {
-        if(message.value ===  'Password inputs match!'){
+    const conditionsAreMet = computed(() => {
+        if(
+            password.value === repeatedPassword.value 
+            && 
+            password.value !== ''
+            && 
+            password.value.length >= 6
+        ){
             return true
-        }
+        } 
         else{
             return false
         }
     })
 
     function handleSubmit(){
-        
+        if(
+            password.value === repeatedPassword.value 
+            && 
+            password.value !== ''
+            && 
+            password.value.length >= 6
+        ){
             let credentials = {email: email.value, password: password.value}
             store.dispatch('authModule/registerUser', credentials)
-            // store.dispatch('authModule/changeCredentials', credentials)
+        }
     }
 
 </script>
@@ -49,7 +69,7 @@
                 <label>repeat password:</label> <input v-model="repeatedPassword"  type="password" />
                 
                 <div class="msg-container">
-                    <span v-if="match" class="green">
+                    <span v-if="conditionsAreMet" class="green">
                         {{message}}
                     </span>
                     <span v-else class="red">
