@@ -6,7 +6,7 @@
 <template>
     <ViewLayout>
         <template v-slot:header-content>
-            Home
+            Homess
         </template>
         
         <template v-slot:main-content>
