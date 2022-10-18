@@ -2,20 +2,22 @@
     import HomeButton from '@/components/buttons/HomeButton.vue'
     import PhotosButton from '@/components/buttons/PhotosButton.vue'
     import {useStore} from 'vuex'
+    import router from '@/router/index.js'
 
     const store = useStore()
 
     function handleLogout(){
         store.dispatch('authModule/logoutUser')
+        router.push('/login')
     }
 </script>
 
 <template>
-    <section id="wrapper">
+    <section v-if="store.state.authModule.authIsReady" id="wrapper">
         <div id="header">
             <slot name="header-content" />
             <div id="right-icons-wrapper">
-                <div v-if="store.state.authModule.userData">
+                <div v-if="store.state.authModule.userData !== null">
                     <button @click="handleLogout">logout</button>                    
                 </div>
                 <PhotosButton />

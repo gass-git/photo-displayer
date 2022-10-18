@@ -2,6 +2,7 @@
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import {ref, computed} from 'vue'
     import {useStore} from 'vuex'
+    import router from '@/router/index.js'
 
     const store = useStore()
     const [email, password, repeatedPassword] = [ref(''), ref(''), ref('')]
@@ -29,10 +30,16 @@
         }
     })
 
-    function handleSubmit(){
+    async function handleSubmit(){
         if(conditionsAreMet.value){
             let credentials = {email: email.value, password: password.value}
-            store.dispatch('authModule/registerUser', credentials)
+            try{
+                await store.dispatch('authModule/registerUser', credentials)
+                router.push('/home')
+            }
+            catch (error){
+                console.log(error)
+            }
         }
         else if(email.value === ''){
             alert.value.show = true

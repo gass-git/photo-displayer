@@ -33,7 +33,10 @@
             
                 <label>Number of albums to show</label>
                 <select v-model="albumsToShow">
-                    <option v-for="number in options" :key="number" :selected="albumsToShow === store.state.albums.max">
+                    <option 
+                        v-for="number in options" 
+                        :key="number" 
+                        :selected="albumsToShow === store.state.albums.max">
                         {{number}}
                     </option>
                 </select>

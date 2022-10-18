@@ -16,18 +16,23 @@
         </template>
         
         <template v-slot:main-content>
-            <WhiteWrapperLayout>
-            <template v-slot:content>
-                Hi! you are logged in with: 
-                <span class="user-email">
-                    {{ store.state.authModule.userData.email }}
-                </span>
-            </template>
+            
+            <WhiteWrapperLayout v-if="store.state.authModule.userData">
+                <template v-slot:content>
+                    Hi! you are logged in with: 
+                    <span class="user-email">
+                        {{ store.state.authModule.userData.email }}
+                    </span>
+                </template>
             </WhiteWrapperLayout>
             
             <NumberOfAlbums />
-            <LoginLink />
-            <CreateAccLink />
+
+            <div v-if="store.state.authModule.userData === null">
+                <LoginLink />
+                <CreateAccLink />
+            </div>
+
         </template>
     </ViewLayout>
 </template>

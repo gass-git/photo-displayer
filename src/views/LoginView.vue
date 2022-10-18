@@ -2,13 +2,18 @@
     import {ref} from 'vue'
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import {useStore} from 'vuex'
+    import router from '@/router/index.js';
 
     const store = useStore()
     const email = ref('')
     const password = ref('')
 
-    function handleSubmit(){
-        store.dispatch('authModule/loginUser', {email: email.value, password: password.value})
+    async function handleSubmit(){
+        await store.dispatch(
+            'authModule/loginUser', 
+            {email: email.value, password: password.value}
+        )
+        router.push('/home')
     }
 </script>
 
