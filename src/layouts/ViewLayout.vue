@@ -3,6 +3,7 @@
     import PhotosButton from '@/components/buttons/PhotosButton.vue'
     import {useStore} from 'vuex'
     import router from '@/router/index.js'
+    import ProfileButton from '@/components/buttons/ProfileButton.vue';
 
     const store = useStore()
 
@@ -20,6 +21,7 @@
                 <div v-if="store.state.authModule.userData !== null">
                     <button @click="handleLogout">logout</button>                    
                 </div>
+                <ProfileButton />
                 <PhotosButton />
                 <HomeButton />
             </div>     

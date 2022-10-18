@@ -2,7 +2,8 @@ import { auth } from '@/firebase/config.js'
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,
-    signOut
+    signOut,
+    updateProfile
 } from 'firebase/auth'
 
 const authModule = {
@@ -19,6 +20,12 @@ const authModule = {
         },
         setAuthIsReady(state, payload){
             state.authIsReady = payload
+        },
+        setDisplayName(state, newDisplayName){
+            state.userData.displayName = newDisplayName
+        },
+        setPhotoURL(state, newPhotoURL){
+            state.userData.photoURL = newPhotoURL
         }
     },
     actions:{
@@ -46,6 +53,21 @@ const authModule = {
             try{
                 await signOut(auth)
                 context.commit('updateUserData', null)
+            }
+            catch (error){
+                console.log(error.message)
+            }
+        },
+        // eslint-disable-next-line
+        async updateFirebaseUserProfile(context){
+            try{
+                await updateProfile(
+                    auth.currentUser, 
+                    {
+                        displayName: context.state.userData.displayName, 
+                        photoURL: context.state.userData.photoURL
+                    }
+                )
             }
             catch (error){
                 console.log(error.message)
