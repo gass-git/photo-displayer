@@ -51,6 +51,12 @@ const authModule = {
                 console.log(error.message)
             }
         }
+    },
+    getters:{
+        userIsLogged(state){
+            if(state.userData) return true
+            else return false
+        }
     }
 }
 
