@@ -1,6 +1,9 @@
 import axios from 'axios'
-import {collection, getDocs} from 'firebase/firestore'
+import {collection} from 'firebase/firestore'
+import { onSnapshot } from 'firebase/firestore'
+// import {getDocs} from 'firebase/firestore'
 import {db} from '@/firebase/config.js'
+
 
 const photos = {
     namespaced: true,
@@ -43,11 +46,18 @@ const photos = {
                 })
             }
         },
-        async fetchFavorites(){
+        async fetchFavorites(context){
+            const uid = 'NFjIEe2YiMMAHIeRSdsHP3fd8N12'
             try{
-                let snapshot = await getDocs(collection(db, 'favorites'))
-                // eslint-disable-next-line
-                snapshot.docs.forEach((doc) => null)
+                onSnapshot(
+                    collection(db, 'users', uid ,'favorites'), (querySnapshot) => {
+                        let newIdsArray = []
+
+                        querySnapshot.forEach((doc) => {
+                            newIdsArray.push(doc.data().photo_id)
+                        })
+                        context.commit('updateFavorites', newIdsArray)
+                })
             }
             catch(error){
                 console.log(error)
