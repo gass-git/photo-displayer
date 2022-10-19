@@ -9,7 +9,9 @@
 
     const store = useStore()
     const userIsLogged = computed(() => store.getters['authModule/userIsLogged'])
+    const displayName = computed(() => store.state.authModule.userData.displayName)
     const userEmail = computed(() => store.state.authModule.userData.email)
+
 </script>
 
 <template>
@@ -22,7 +24,8 @@
             
             <WhiteWrapperLayout v-if="userIsLogged">
                 <template v-slot:content>
-                    Hi! you are logged in with: 
+                    Hello <span v-if="displayName">{{displayName}}</span> 
+                    , you are logged in with: 
                     <span class="user-email">
                         {{ userEmail }}
                     </span>
@@ -41,8 +44,8 @@
 </template>
 
 <style scoped>
-.user-email{
-    margin-left:8px;
+span{
+    margin:0 0 0 5px ;
     color:blue;
 }
 </style>
