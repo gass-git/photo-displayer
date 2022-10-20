@@ -11,7 +11,7 @@
     const userIsLogged = computed(() => store.getters['authModule/userIsLogged'])
     const displayName = computed(() => store.state.authModule.userData.displayName)
     const userEmail = computed(() => store.state.authModule.userData.email)
-    const favoritePhotosID = computed(() => store.state.photos.favorites)
+    const favorites = computed(() => store.state.photos.favorites)
 </script>
 
 <template>
@@ -36,14 +36,13 @@
                 <WhiteWrapperLayout>
                     <template v-slot:content>
                         Your favorite photos (ids)
-                        <div class="blue-box" v-for="id in favoritePhotosID" :key="id">
-                            {{id}}
+                        <div class="blue-box" v-for="favorite in favorites" :key="favorite.photoId">
+                            {{favorite.photoId}}
                         </div>
                     </template>
                 </WhiteWrapperLayout>
 
             </section>
-            
             
             <NumberOfAlbums />
 
