@@ -2,6 +2,7 @@
     import {computed} from 'vue'
     import {useStore} from 'vuex'
     import AlbumButton from '@/components/menuOptions/children/AlbumButton.vue'
+    import FavoritesOption from '@/components/FavoritesOption.vue'
 
     const store = useStore() 
     const maxAlbums = computed(() => store.state.albums.max)
@@ -11,6 +12,7 @@
 </script>
 
 <template>
+    <FavoritesOption />
     <div v-for="album in albumsToShow" :key="album.id">
         <AlbumButton
             :albumId="album.id"

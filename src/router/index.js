@@ -4,6 +4,7 @@ import PhotosView from '@/views/PhotosView.vue'
 import CreateAccView from '@/views/CreateAccView.vue'
 import LoginView from '@/views/LoginView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import FavoritesView from '@/views/FavoritesView.vue'
 
 const routes = [
     {
@@ -37,6 +38,11 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: ProfileView
+    },
+    {
+        path:'/favorites',
+        name: 'favorites',
+        component: FavoritesView
     }
 ]
 
