@@ -4,6 +4,7 @@
     import {useStore} from 'vuex'
     import router from '@/router/index.js'
     import ProfileButton from '@/components/buttons/ProfileButton.vue';
+    import FavoriteButton from '@/components/buttons/FavoritesButton.vue'
 
     const store = useStore()
 
@@ -21,6 +22,7 @@
                 <div v-if="store.state.authModule.userData !== null">
                     <button @click="handleLogout">logout</button>                    
                 </div>
+                <FavoriteButton />
                 <ProfileButton />
                 <PhotosButton />
                 <HomeButton />
