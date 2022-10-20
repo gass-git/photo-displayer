@@ -1,9 +1,14 @@
 import axios from 'axios'
 import {collection} from 'firebase/firestore'
-import { onSnapshot } from 'firebase/firestore'
-// import {getDocs} from 'firebase/firestore'
+import {onSnapshot} from 'firebase/firestore'
+import {deleteDoc} from 'firebase/firestore'
+import {addDoc, doc} from 'firebase/firestore'
+import {orderBy} from 'firebase/firestore'
+import {query} from 'firebase/firestore'
 import {db} from '@/firebase/config.js'
 
+const favoritesCollectionRef = collection(db, 'users', 'NFjIEe2YiMMAHIeRSdsHP3fd8N12', 'favorites')
+const favoritesCollectionQuery = query(favoritesCollectionRef, orderBy('date', 'desc'))
 
 const photos = {
     namespaced: true,
@@ -47,14 +52,12 @@ const photos = {
             }
         },
         async fetchFavorites(context){
-            const uid = 'NFjIEe2YiMMAHIeRSdsHP3fd8N12'
             try{
-                onSnapshot(
-                    collection(db, 'users', uid ,'favorites'), (querySnapshot) => {
+                onSnapshot(favoritesCollectionQuery, (querySnapshot) => {
                         let newIdsArray = []
 
                         querySnapshot.forEach((doc) => {
-                            newIdsArray.push(doc.data().photo_id)
+                            newIdsArray.push({firestoreDocId: doc.id, photoId: doc.data().photo_id})
                         })
                         context.commit('updateFavorites', newIdsArray)
                 })
@@ -62,7 +65,29 @@ const photos = {
             catch(error){
                 console.log(error)
             }
-        }
+        },
+        async addFavorite(context, photoId){
+            let newDate = new Date().getTime()
+            
+            try{
+                await 
+                addDoc(favoritesCollectionRef, {
+                    photo_id: photoId,
+                    date: newDate
+                })
+            }
+            catch (error){
+                console.log(error.message)
+            }
+       },
+       async removeFavorite(context, firestoreDocId){
+            try{
+                await deleteDoc(doc(favoritesCollectionRef, firestoreDocId))
+            }
+            catch (error){
+                console.log(error.message)
+            }
+       }
     },
     getters: {
                

@@ -1,6 +1,6 @@
 <script setup> 
     import {useStore} from 'vuex'
-    import {computed, onMounted} from 'vue'
+    import {computed} from 'vue'
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import NumberOfAlbums from '@/components/NumberOfAlbums.vue'
     import LoginLink from '@/components/LoginLink.vue'
@@ -12,9 +12,6 @@
     const displayName = computed(() => store.state.authModule.userData.displayName)
     const userEmail = computed(() => store.state.authModule.userData.email)
     const favoritePhotosID = computed(() => store.state.photos.favorites)
-
-    onMounted(() => store.dispatch('photos/fetchFavorites'))
-
 </script>
 
 <template>

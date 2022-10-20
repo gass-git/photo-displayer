@@ -8,6 +8,7 @@
     const store = useStore()
     const photos = computed(() => store.state.photos.data)
     const albumTitle = computed(() => store.getters['albums/title'])
+    const favorites = computed(() => store.state.photos.favorites)
 
     watchEffect(() => {
         let newId = route.params.albumId
@@ -15,6 +16,24 @@
         store.dispatch('photos/showByAlbum', {albumId: newId})
         store.dispatch('albums/updateId', {newId: newId})
     })
+
+    function handleClick(photo){
+        let favoriteFound = favorites.value.find(property => property.photoId === photo.id)
+        
+        if(favoriteFound){
+            store.dispatch('photos/removeFavorite', favoriteFound.firestoreDocId)
+        }
+        else{
+            store.dispatch('photos/addFavorite', photo.id)
+        }
+    }
+
+    function isFavorite(photo){
+        let favoriteFound = favorites.value.find(property => property.photoId === photo.id)
+
+        if(favoriteFound) return true
+        else return false
+    }
 </script>
 
 <template>
@@ -25,21 +44,53 @@
         </template>
 
         <template v-slot:main-content>
-            <img 
-                v-for="photo in photos" 
-                :key="photo.id" 
-                :src="photo.thumbnailUrl" 
-            />
+            <div class="flex-wrapper">
+                <div 
+                    v-for="photo in photos" 
+                    :key="photo.id"
+                    @click="handleClick(photo)"
+                    class="photo-container"
+                >   <div class="fav">
+                        <span v-if="isFavorite(photo)" class="material-symbols-outlined fill-icon">
+                            favorite
+                        </span>
+                        <span v-else class="material-symbols-outlined">
+                            favorite
+                        </span>
+                    </div>
+                    <img :src="photo.thumbnailUrl" />
+                </div>
+            </div>
         </template>
 
     </ViewLayout>
 </template>
 
 <style scoped>
-    img{
-        height:150px;
-        width:150px;
-        padding:10px;
-        border-radius: 15px;
-    }
+.flex-wrapper{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    width:auto;
+    height: auto;
+}
+.photo-container{
+    border-radius:5px;
+    overflow: hidden;
+    width:150px;
+    height:150px;
+    margin:10px;
+    transition:100ms;
+}
+.photo-container:hover{
+    cursor:pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.fav{
+    position: absolute;
+    padding:5px;
+    color:white;
+    opacity:0.6;
+    
+}
 </style>
