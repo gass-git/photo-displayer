@@ -1,59 +1,52 @@
-import axios from 'axios'
-import {collection} from 'firebase/firestore'
-import {onSnapshot} from 'firebase/firestore'
-import {deleteDoc} from 'firebase/firestore'
-import {addDoc, doc} from 'firebase/firestore'
-import {orderBy} from 'firebase/firestore'
-import {query} from 'firebase/firestore'
+import {collection, onSnapshot, deleteDoc, addDoc, doc, orderBy, query} from 'firebase/firestore'
 import {db} from '@/firebase/config.js'
 
-const favoritesCollectionRef = collection(db, 'users', 'NFjIEe2YiMMAHIeRSdsHP3fd8N12', 'favorites')
-const favoritesCollectionQuery = query(favoritesCollectionRef, orderBy('date', 'desc'))
+const PHOTOS_API = `https://jsonplaceholder.typicode.com/photos`
 
 const photos = {
     namespaced: true,
     state(){
         return {
-            data: [],
-            cache: {},
-            favorites: []
+            photos: [],
+            favorites: [],
+            userId: ''
         }
     },
     mutations: {
-        updateData(state, {data, albumId}){
-            state.data = data
-
-            // add data to cache only if it has not been added before
-            if(!(albumId in state.cache)) state.cache[albumId] = data;
+        updatePhotos(state, photosArray){
+            state.photos = photosArray
         },
         updateFavorites(state, data){
             state.favorites = data
+        },
+        /*
+        updateUserId(state, id){
+            state.userId = id
+        }
+        */
+        cleanSessionFavorites(state){
+            state.favorites = []
         }
     },
-    actions: { 
-        showByAlbum(context, {albumId}){
-            
-            // dont fetch if the photos are in cache
-            if(albumId in context.state.cache){
-                context.commit(
-                    'updateData', 
-                    {
-                        data: context.state.cache[albumId], 
-                        albumId
-                    }
-                )
+    actions: {
+        /*setUserId(context){
+            let id = 
+            context.commit('updateUserId', id)
+        },*/
+        async fetchAll(context){
+            try{
+                const resp = await fetch(PHOTOS_API)
+                const photosArray = await resp.json()
+                context.commit('updatePhotos', photosArray)
             }
-            else{
-                let API_URL = `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
-
-                axios.get(API_URL).then((resp) => {
-                    context.commit('updateData', {data: resp.data, albumId})
-                })
+            catch (error) {
+                console.log(error)
             }
         },
         async fetchFavorites(context){
+            // console.log(context.rootState.authModule.userData.uid)
             try{
-                onSnapshot(favoritesCollectionQuery, (querySnapshot) => {
+                onSnapshot(query(collection(db, 'users', context.rootState.authModule.userData.uid, 'favorites'), orderBy('date', 'desc')), (querySnapshot) => {
                         let newIdsArray = []
 
                         querySnapshot.forEach((doc) => {
@@ -71,7 +64,7 @@ const photos = {
             
             try{
                 await 
-                addDoc(favoritesCollectionRef, {
+                addDoc(collection(db, 'users', context.rootState.authModule.userData.uid, 'favorites'), {
                     photo_id: photoId,
                     date: newDate
                 })
@@ -82,7 +75,7 @@ const photos = {
        },
        async removeFavorite(context, firestoreDocId){
             try{
-                await deleteDoc(doc(favoritesCollectionRef, firestoreDocId))
+                await deleteDoc(doc(collection(db, 'users', context.rootState.authModule.userData.uid, 'favorites'), firestoreDocId))
             }
             catch (error){
                 console.log(error.message)
@@ -90,7 +83,9 @@ const photos = {
        }
     },
     getters: {
-               
+        fromSelectedAlbum: (state) => (id) => {
+            return state.photos.filter((photo) => photo.albumId == id)
+        }
     }
 }
 

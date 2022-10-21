@@ -1,17 +1,12 @@
 <script setup>
     import {useStore} from 'vuex'
-    import {computed, onMounted} from 'vue'
+    import {computed} from 'vue'
     import {useRoute} from 'vue-router'
-
 
     const route = useRoute()
     const store = useStore()
     const favorites = computed(() => store.state.photos.favorites)
     const isSelected = computed(() => route.path == '/favorites')
-
-    onMounted(() => {
-        console.log(route.path)
-    })
 </script>
 
 <template>

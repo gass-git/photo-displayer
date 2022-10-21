@@ -6,15 +6,14 @@
 
     const route = useRoute()
     const store = useStore()
-    const photos = computed(() => store.state.photos.data)
+    
+    const selectedAlbumId = computed(() => route.params.albumId)
+    const photos = computed(() => store.getters['photos/fromSelectedAlbum'](selectedAlbumId.value))
     const albumTitle = computed(() => store.getters['albums/title'])
     const favorites = computed(() => store.state.photos.favorites)
 
     watchEffect(() => {
-        let newId = route.params.albumId
-
-        store.dispatch('photos/showByAlbum', {albumId: newId})
-        store.dispatch('albums/updateId', {newId: newId})
+        store.dispatch('albums/updateId', {newId: selectedAlbumId})
     })
 
     function handleClick(photo){

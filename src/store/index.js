@@ -14,8 +14,16 @@ export default createStore({
   }
 })
 
+// eslint-disable-next-line
 const unsubscribe = onAuthStateChanged(auth, (user) => {
-  store.commit('authModule/setAuthIsReady', true)
   store.commit('authModule/updateUserData', user)
-  unsubscribe()
+  store.commit('authModule/setAuthIsReady', true)
+
+  if(user !== null){
+    // store.dispatch('photos/setUserId')
+    store.dispatch('photos/fetchFavorites')
+  }
+  else{
+    store.commit('photos/cleanSessionFavorites')
+  }
 })
