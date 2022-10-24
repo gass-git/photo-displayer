@@ -12,7 +12,7 @@
 
 <template>
     <router-link to="/favorites">
-        <NavButtonLayout :show="pathIsFavorites()" iconName="favorite" />
+        <NavButtonLayout :fill="pathIsFavorites()" iconName="favorite" />
     </router-link>
 </template>
 

@@ -1,12 +1,12 @@
 <script setup>
     import {defineProps} from 'vue'
 
-    const props = defineProps({show:Boolean, iconName:String})
+    const props = defineProps({fill:Boolean, iconName:String})
 </script>
 
 <template>
     <slot name="button-content">
-        <div v-if="props.show" class="profile-link-wrapper">
+        <div v-if="props.fill" class="profile-link-wrapper">
             <span class="material-symbols-outlined fill-icon">
                 {{props.iconName}}
             </span>
