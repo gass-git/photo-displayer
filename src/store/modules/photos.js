@@ -1,15 +1,14 @@
 import {collection, onSnapshot, deleteDoc, addDoc, doc, orderBy, query} from 'firebase/firestore'
 import {db} from '@/firebase/config.js'
 
-const PHOTOS_API = `https://jsonplaceholder.typicode.com/photos`
+const PHOTOS_API = 'https://jsonplaceholder.typicode.com/photos'
 
 const photos = {
     namespaced: true,
     state(){
         return {
             photos: [],
-            favorites: [],
-            userId: ''
+            favorites: []
         }
     },
     mutations: {
@@ -19,30 +18,11 @@ const photos = {
         updateFavorites(state, data){
             state.favorites = data
         },
-        /*
-        updateUserId(state, id){
-            state.userId = id
-        }
-        */
         cleanSessionFavorites(state){
             state.favorites = []
         }
     },
     actions: {
-        /*setUserId(context){
-            let id = 
-            context.commit('updateUserId', id)
-        },*/
-        async fetchAll(context){
-            try{
-                const resp = await fetch(PHOTOS_API)
-                const photosArray = await resp.json()
-                context.commit('updatePhotos', photosArray)
-            }
-            catch (error) {
-                console.log(error)
-            }
-        },
         async fetchFavorites(context){
             // console.log(context.rootState.authModule.userData.uid)
             try{
@@ -59,6 +39,16 @@ const photos = {
                 console.log(error)
             }
         },
+        async fetchAll(context){
+            try{
+                const resp = await fetch(PHOTOS_API)
+                const photosArray = await resp.json()
+                context.commit('updatePhotos', photosArray)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        },
         async addFavorite(context, photoId){
             let newDate = new Date().getTime()
             
@@ -72,15 +62,15 @@ const photos = {
             catch (error){
                 console.log(error.message)
             }
-       },
-       async removeFavorite(context, firestoreDocId){
+        },
+        async removeFavorite(context, firestoreDocId){
             try{
                 await deleteDoc(doc(collection(db, 'users', context.rootState.authModule.userData.uid, 'favorites'), firestoreDocId))
             }
             catch (error){
                 console.log(error.message)
             }
-       }
+        }
     },
     getters: {
         fromSelectedAlbum: (state) => (id) => {

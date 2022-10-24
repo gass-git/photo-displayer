@@ -19,7 +19,7 @@
         <div id="header">
             <slot name="header-content" />
             <div id="right-icons-wrapper">
-                <div v-if="store.state.authModule.userData !== null">
+                <div v-if="store.state.authModule.userAuth !== null">
                     <button @click="handleLogout">logout</button>                    
                 </div>
                 <FavoriteButton />

@@ -9,8 +9,8 @@
 
     const store = useStore()
     const userIsLogged = computed(() => store.getters['authModule/userIsLogged'])
-    const displayName = computed(() => store.state.authModule.userData.displayName)
-    const userEmail = computed(() => store.state.authModule.userData.email)
+    const displayName = computed(() => store.state.authModule.userAuth.displayName)
+    const userEmail = computed(() => store.state.authModule.userAuth.email)
     //const favorites = computed(() => store.state.photos.favorites)
 </script>
 

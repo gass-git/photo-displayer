@@ -5,8 +5,8 @@
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
 
     const store = useStore()
-    const currentDisplayName = computed(() => store.state.authModule.userData.displayName)
-    const currentPhotoURL = computed(() =>  store.state.authModule.userData.photoURL)
+    const currentDisplayName = computed(() => store.state.authModule.userAuth.displayName)
+    const currentPhotoURL = computed(() =>  store.state.authModule.userAuth.photoURL)
 
     function updateDisplayName(e){
         store.commit('authModule/setDisplayName', e.target.value)
