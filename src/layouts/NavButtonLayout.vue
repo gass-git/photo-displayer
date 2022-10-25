@@ -1,7 +1,7 @@
 <script setup>
     import {defineProps} from 'vue'
 
-    const props = defineProps({fill:Boolean, iconName:String})
+    const props = defineProps({fill:Boolean, iconName:String, border:Boolean})
 </script>
 
 <template>

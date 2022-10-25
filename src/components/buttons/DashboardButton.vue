@@ -6,12 +6,12 @@
     const currentPath = computed(() => useRoute().path)
 
     function pathIsProfile(){
-        return currentPath.value === '/profile' ? true : false
+        return currentPath.value === '/dashboard' ? true : false
     }
 </script>
 
 <template>
-    <router-link to="/profile">
+    <router-link to="/dashboard">
         <NavButtonLayout :fill="pathIsProfile()" iconName="face" />
     </router-link>
 </template>

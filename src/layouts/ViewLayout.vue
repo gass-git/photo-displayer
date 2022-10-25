@@ -1,16 +1,18 @@
 <script setup>
+    import {computed} from 'vue'
     import HomeButton from '@/components/buttons/HomeButton.vue'
     import PhotosButton from '@/components/buttons/PhotosButton.vue'
     import {useStore} from 'vuex'
-    import router from '@/router/index.js'
-    //import ProfileButton from '@/components/buttons/ProfileButton.vue';
+    //import router from '@/router/index.js'
+    import DashboardButton from '@/components/buttons/DashboardButton.vue';
     import FavoriteButton from '@/components/buttons/FavoritesButton.vue'
+    import HeaderButton from '@/components/HeaderButton.vue'
 
     const store = useStore()
+    const userIsLogged = computed(() => store.getters['auth/userIsLogged'])
 
     function handleLogout(){
         store.dispatch('auth/logoutUser')
-        router.push('/login')
     }
 </script>
 
@@ -19,11 +21,31 @@
         <div id="header">
             <slot name="header-content" />
             <div id="right-icons-wrapper">
-                <div v-if="store.state.auth.data !== null">
-                    <button @click="handleLogout">logout</button>                    
-                </div>
+
+                <HeaderButton 
+                    v-if="userIsLogged === false"
+                    text="Log in" 
+                    path="/login" 
+                    :border="false"
+                />
+                <HeaderButton 
+                    v-if="userIsLogged === false"
+                    text="Create account" 
+                    path="/create-account" 
+                    :border="true" 
+                />
+
+                <HeaderButton 
+                    v-if="userIsLogged"
+                    @click="handleLogout"
+                    text="Log out" 
+                    path="/login" 
+                    :border="true"
+                />
+                
+                <DashboardButton v-if="userIsLogged"/>
+
                 <FavoriteButton />
-                <!-- <ProfileButton /> -->
                 <PhotosButton />
                 <HomeButton />
             </div>     

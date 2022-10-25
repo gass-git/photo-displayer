@@ -3,7 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import PhotosView from '@/views/PhotosView.vue'
 import CreateAccView from '@/views/CreateAccView.vue'
 import LoginView from '@/views/LoginView.vue'
-import ProfileView from '@/views/ProfileView.vue'
+import DashboardView from '@/views/DashboardView.vue'
 import FavoritesView from '@/views/FavoritesView.vue'
 
 const routes = [
@@ -35,9 +35,9 @@ const routes = [
         component: LoginView
     },
     {
-        path: '/profile',
-        name: 'profile',
-        component: ProfileView
+        path: '/dashboard',
+        name: 'dashboard',
+        component: DashboardView
     },
     {
         path:'/favorites',
