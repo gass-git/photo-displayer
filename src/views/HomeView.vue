@@ -8,10 +8,9 @@
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
 
     const store = useStore()
-    const userIsLogged = computed(() => store.getters['authModule/userIsLogged'])
-    const displayName = computed(() => store.state.authModule.userAuth.displayName)
-    const userEmail = computed(() => store.state.authModule.userAuth.email)
-    //const favorites = computed(() => store.state.photos.favorites)
+    const userIsLogged = computed(() => store.getters['auth/userIsLogged'])
+    const displayName = computed(() => store.state.auth.data.displayName)
+    const userEmail = computed(() => store.state.auth.data.email)
 </script>
 
 <template>
@@ -32,16 +31,6 @@
                         </span>
                     </template>
                 </WhiteWrapperLayout>
-<!--
-                <WhiteWrapperLayout>
-                    <template v-slot:content>
-                        Your favorite photos (ids)
-                        <div class="blue-box" v-for="favorite in favorites" :key="favorite.photoId">
-                            {{favorite.photoId}}
-                        </div>
-                    </template>
-                </WhiteWrapperLayout>
--->
             </section>
             
             <NumberOfAlbums />

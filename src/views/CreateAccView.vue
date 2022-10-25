@@ -34,7 +34,7 @@
         if(conditionsAreMet.value){
             let credentials = {email: email.value, password: password.value}
             try{
-                await store.dispatch('authModule/registerUser', credentials)
+                await store.dispatch('auth/registerUser', credentials)
                 router.push('/home')
             }
             catch (error){

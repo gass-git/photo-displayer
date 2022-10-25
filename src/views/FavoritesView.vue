@@ -5,17 +5,11 @@
 
     const store = useStore()
 
-    const photos = computed(() => store.state.photos.photos)
+    const photos = computed(() => store.state.photos.data)
 
     // array of the id of the favorite images 
-    const favorites = computed(() => {
-        let objectsArr = store.state.photos.favorites
-        let idsArr = []
-        objectsArr.forEach((obj) => idsArr.push(obj.photoId))
-
-        return idsArr
-    })
-    const authIsReady = computed(() => store.state.authModule.authIsReady)
+    const favorites = computed(() => store.state.user.data.favoritePhotos.ids)
+    const authIsReady = computed(() => store.state.auth.authIsReady)
 
     const favoritePhotos = computed(() => {
         return photos.value.filter(photo => favorites.value.includes(photo.id))

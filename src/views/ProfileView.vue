@@ -5,19 +5,25 @@
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
 
     const store = useStore()
-    const currentDisplayName = computed(() => store.state.authModule.userAuth.displayName)
-    const currentPhotoURL = computed(() =>  store.state.authModule.userAuth.photoURL)
+    const currentDisplayName = computed(() => store.state.auth.userAuth.displayName)
+    const currentPhotoURL = computed(() =>  store.state.auth.userAuth.photoURL)
 
+    /*
     function updateDisplayName(e){
-        store.commit('authModule/setDisplayName', e.target.value)
+        // the following action has been removed from the store
+        // store.commit('auth/setDisplayName', e.target.value)
     }
-
+    /*
+    
+    /*
     function updatePhotoURL(e){
-        store.commit('authModule/setPhotoURL', e.target.value)
+        store.commit('auth/setPhotoURL', e.target.value)
     }
+    */
 
     function handleSubmit(){
-        store.dispatch('authModule/updateFirebaseUserProfile')
+        // the following action has been removed from the store
+        //store.dispatch('auth/updateFirebaseUserProfile')
     }
 </script>
 

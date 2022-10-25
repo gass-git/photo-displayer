@@ -10,25 +10,27 @@
     const selectedAlbumId = computed(() => route.params.albumId)
     const photos = computed(() => store.getters['photos/fromSelectedAlbum'](selectedAlbumId.value))
     const albumTitle = computed(() => store.getters['albums/title'])
-    const favorites = computed(() => store.state.photos.favorites)
+    const favoritePhotos = computed(() => store.state.user.data.favoritePhotos)
 
     watchEffect(() => {
-        store.dispatch('albums/updateId', {newId: selectedAlbumId})
+        store.commit('albums/updateSelectedId', selectedAlbumId)
     })
 
     function handleClick(photo){
-        let favoriteFound = favorites.value.find(property => property.photoId === photo.id)
+        let idFound = favoritePhotos.value.ids.find(id => id == photo.id)
         
-        if(favoriteFound){
-            store.dispatch('photos/removeFavorite', favoriteFound.firestoreDocId)
+        console.log(favoritePhotos.value)
+
+        if(idFound){
+            store.dispatch('user/removeFavoritePhoto', photo.id)
         }
         else{
-            store.dispatch('photos/addFavorite', photo.id)
+            store.dispatch('user/addFavoritePhoto', photo.id)
         }
     }
 
     function isFavorite(photo){
-        let favoriteFound = favorites.value.find(property => property.photoId === photo.id)
+        let favoriteFound = favoritePhotos.value.ids.find(id => id === photo.id)
 
         if(favoriteFound) return true
         else return false
@@ -49,7 +51,8 @@
                     :key="photo.id"
                     @click="handleClick(photo)"
                     class="photo-container"
-                >   <div class="fav">
+                > 
+                    <div class="fav">
                         <span v-if="isFavorite(photo)" class="material-symbols-outlined fill-icon">
                             favorite
                         </span>

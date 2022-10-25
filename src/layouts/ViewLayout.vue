@@ -3,27 +3,27 @@
     import PhotosButton from '@/components/buttons/PhotosButton.vue'
     import {useStore} from 'vuex'
     import router from '@/router/index.js'
-    import ProfileButton from '@/components/buttons/ProfileButton.vue';
+    //import ProfileButton from '@/components/buttons/ProfileButton.vue';
     import FavoriteButton from '@/components/buttons/FavoritesButton.vue'
 
     const store = useStore()
 
     function handleLogout(){
-        store.dispatch('authModule/logoutUser')
+        store.dispatch('auth/logoutUser')
         router.push('/login')
     }
 </script>
 
 <template>
-    <section v-if="store.state.authModule.authIsReady" id="wrapper">
+    <section v-if="store.state.auth.authIsReady" id="wrapper">
         <div id="header">
             <slot name="header-content" />
             <div id="right-icons-wrapper">
-                <div v-if="store.state.authModule.userAuth !== null">
+                <div v-if="store.state.auth.userAuth !== null">
                     <button @click="handleLogout">logout</button>                    
                 </div>
                 <FavoriteButton />
-                <ProfileButton />
+                <!-- <ProfileButton /> -->
                 <PhotosButton />
                 <HomeButton />
             </div>     

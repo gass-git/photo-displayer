@@ -9,11 +9,11 @@
     const showToast = ref(false)
 
     const albumsToShow = computed({
-        get: () => store.state.albums.max,
+        get: () => store.state.albums.maxToShow,
         set: (n) => store.dispatch('albums/updateCurrentMax', n)
     })
 
-    watch(() => store.getters['albums/max'], () => {
+    watch(() => store.getters['albums/maxToShow'], () => {
         triggerToast()
     })
 
@@ -30,13 +30,13 @@
 <template>
     <WhiteWrapperLayout>
         <template v-slot:content>
-            
                 <label>Number of albums to show</label>
                 <select v-model="albumsToShow">
                     <option 
                         v-for="number in options" 
                         :key="number" 
-                        :selected="albumsToShow === store.state.albums.max">
+                        :selected="albumsToShow === store.state.albums.maxToShow"
+                    >
                         {{number}}
                     </option>
                 </select>
@@ -44,7 +44,6 @@
                 <div v-if="showToast">
                     <AppToast message="value updated!"/>
                 </div>
-
         </template>
     </WhiteWrapperLayout>
 </template>

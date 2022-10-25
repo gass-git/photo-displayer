@@ -5,10 +5,9 @@
     import FavoritesOption from '@/components/FavoritesOption.vue'
 
     const store = useStore() 
-    const maxAlbums = computed(() => store.state.albums.max)
+    const maxAlbums = computed(() => store.state.albums.maxToShow)
     const allAlbums = computed(() => store.state.albums.data)
-    const albumsToShow = computed(() => allAlbums.value.slice(0,maxAlbums.value))
-
+    const albumsToShow = computed(() => allAlbums.value.slice(0, maxAlbums.value))
 </script>
 
 <template>

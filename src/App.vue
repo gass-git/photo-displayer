@@ -4,12 +4,21 @@
     import AppLayout from '@/layouts/AppLayout.vue'
     import AppName from '@/components/AppName.vue'
     import MenuOptions from '@/components/menuOptions/MenuOptions.vue'
+    import {onAuthStateChanged} from 'firebase/auth'
+    import {auth} from '@/firebase/config.js'
 
     const store = useStore()
 
     onMounted(() => {
+        onAuthStateChanged(auth, (user) => {
+            store.commit('auth/setData', user)
+            store.commit('auth/setAuthIsReady', true)
+
+            user !== null ? store.dispatch('user/load', user.uid) : null
+        })
+        
         store.dispatch('albums/fetch')
-        store.dispatch('photos/fetchAll')
+        store.dispatch('photos/fetch')
     })
 </script>
 

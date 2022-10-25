@@ -11,7 +11,7 @@
     async function handleSubmit(){
         const credentials = {email: email.value, password: password.value}
         
-        await store.dispatch('authModule/loginUser', credentials)
+        await store.dispatch('auth/loginUser', credentials)
         router.push('/home')
     }
 </script>
