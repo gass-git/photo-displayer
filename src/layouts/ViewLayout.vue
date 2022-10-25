@@ -15,11 +15,11 @@
 </script>
 
 <template>
-    <section v-if="store.state.auth.authIsReady" id="wrapper">
+    <section v-if="store.state.auth.isReady" id="wrapper">
         <div id="header">
             <slot name="header-content" />
             <div id="right-icons-wrapper">
-                <div v-if="store.state.auth.userAuth !== null">
+                <div v-if="store.state.auth.data !== null">
                     <button @click="handleLogout">logout</button>                    
                 </div>
                 <FavoriteButton />

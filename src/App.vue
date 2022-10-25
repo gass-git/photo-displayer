@@ -12,7 +12,7 @@
     onMounted(() => {
         onAuthStateChanged(auth, (user) => {
             store.commit('auth/setData', user)
-            store.commit('auth/setAuthIsReady', true)
+            store.commit('auth/setToReady', true)
 
             user !== null ? store.dispatch('user/load', user.uid) : null
         })

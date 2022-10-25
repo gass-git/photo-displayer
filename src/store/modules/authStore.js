@@ -7,15 +7,15 @@ export const authStore = {
     state(){
         return {
             data: null,
-            authIsReady: false
+            isReady: false
         }
     },
     mutations:{
         setData(state, payload){
             state.data = payload
         },
-        setAuthIsReady(state, payload){
-            state.authIsReady = payload
+        setToReady(state, payload){
+            state.isReady = payload
         }
     },
     actions:{

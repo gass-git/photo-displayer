@@ -9,16 +9,14 @@
 
     // array of the id of the favorite images 
     const favorites = computed(() => store.state.user.data.favoritePhotos.ids)
-    const authIsReady = computed(() => store.state.auth.authIsReady)
 
     const favoritePhotos = computed(() => {
         return photos.value.filter(photo => favorites.value.includes(photo.id))
     })
-
 </script>
 
 <template>
-    <ViewLayout v-if="authIsReady">
+    <ViewLayout v-if="store.state.auth.isReady">
         <template v-slot:header-content>
             favorites
         </template>
