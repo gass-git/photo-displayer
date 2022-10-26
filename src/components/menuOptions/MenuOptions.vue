@@ -2,7 +2,7 @@
     import {computed} from 'vue'
     import {useStore} from 'vuex'
     import AlbumButton from '@/components/menuOptions/children/AlbumButton.vue'
-    import FavoritesOption from '@/components/FavoritesOption.vue'
+    import FavoritesOption from './children/FavoritesOption.vue'
 
     const store = useStore() 
     const maxAlbums = computed(() => store.state.albums.maxToShow)

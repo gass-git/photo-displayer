@@ -34,7 +34,7 @@ export const authStore = {
                 const res = await signInWithEmailAndPassword(auth, email, password)
                 const userAuthData = res.user
                 context.commit('setData', userAuthData) 
-                context.dispatch('user/fetch', res.user.uid, {root: true})
+                context.dispatch('user/load', res.user.uid, {root: true})
             }
             catch (error){
                 console.log(error.message)

@@ -2,9 +2,6 @@
     import {useStore} from 'vuex'
     import {computed} from 'vue'
     import ViewLayout from '@/layouts/ViewLayout.vue'
-    import NumberOfAlbums from '@/components/NumberOfAlbums.vue'
-    import LoginLink from '@/components/LoginLink.vue'
-    import CreateAccLink from '@/components/CreateAccLink.vue'
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
 
     const store = useStore()
@@ -33,14 +30,7 @@
                 </WhiteWrapperLayout>
             </section>
             
-            <NumberOfAlbums />
-
-            <div v-if="!userIsLogged">
-                <LoginLink />
-                <CreateAccLink />
-            </div>
-
-        </template>
+       </template>
     </ViewLayout>
 </template>
 
