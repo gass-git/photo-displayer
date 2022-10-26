@@ -32,7 +32,6 @@
 
     function isFavorite(photo){
         let favoriteFound = favoritePhotos.value.ids.find(id => id === photo.id)
-
         return favoriteFound ? true : false
     }
 </script>
@@ -46,7 +45,7 @@
 
         <template v-slot:main-content>
             
-            <div v-if="userIsLogged" class="flex-wrapper">
+            <section v-if="userIsLogged" class="photos-flex-wrapper">
                 <div 
                     v-for="photo in albumPhotos" 
                     :key="photo.id"
@@ -63,9 +62,9 @@
                     </div>
                     <img :src="photo.thumbnailUrl" />
                 </div>
-            </div>
+            </section>
 
-            <div v-else class="flex-wrapper">
+            <section v-else class="photos-flex-wrapper">
                 <div 
                     v-for="photo in albumPhotos" 
                     :key="photo.id"
@@ -73,7 +72,7 @@
                 > 
                     <img :src="photo.thumbnailUrl" />
                 </div>
-            </div>
+            </section>
 
         </template>
 
@@ -81,7 +80,7 @@
 </template>
 
 <style scoped>
-.flex-wrapper{
+.photos-flex-wrapper{
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
@@ -105,6 +104,5 @@
     padding:5px;
     color:white;
     opacity:0.6;
-    
 }
 </style>
