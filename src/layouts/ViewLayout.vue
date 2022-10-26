@@ -8,7 +8,10 @@
     import HeaderButton from '@/components/HeaderButton.vue'
 
     const store = useStore()
-    const userIsLogged = computed(() => store.getters['auth/userIsLogged'])
+    
+    const
+        userIsLogged = computed(() => store.getters['auth/userIsLogged']),
+        userIsNotLogged = !userIsLogged.value;
 
     function handleLogout(){
         store.dispatch('auth/logoutUser')
@@ -20,15 +23,14 @@
         <div id="header">
             <slot name="header-content" />
             <div id="right-icons-wrapper">
-
                 <HeaderButton 
-                    v-if="userIsLogged === false"
+                    v-if="userIsNotLogged"
                     text="Log in" 
                     path="/login" 
                     :border="false"
                 />
                 <HeaderButton 
-                    v-if="userIsLogged === false"
+                    v-if="userIsNotLogged"
                     text="Create account" 
                     path="/create-account" 
                     :border="true" 
@@ -41,10 +43,9 @@
                     path="/login" 
                     :border="true"
                 />
-                
                 <DashboardButton v-if="userIsLogged"/>
-
                 <FavoriteButton v-if="userIsLogged" />
+
                 <PhotosButton />
                 <HomeButton />
             </div>     

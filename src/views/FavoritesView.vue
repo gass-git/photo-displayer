@@ -1,45 +1,57 @@
 <script setup>
-    import ViewLayout from '@/layouts/ViewLayout.vue'
+    import {computed, watchEffect, ref} from 'vue'
     import {useStore} from 'vuex'
-    import {computed} from 'vue'
+    import ViewLayout from '@/layouts/ViewLayout.vue'
 
-    const store = useStore()
+    const 
+        store = useStore(),
+        favoritePhotos = ref([]);
 
-    const photos = computed(() => store.state.photos.data)
+    const
+        photos = computed(() => store.state.photos.data),
+        idsOfFavorites = computed(() => store.state.user.data.favoritePhotos.ids),
+        authIsReady = computed(() => store.state.auth.isReady);
 
-    // array of the id of the favorite images 
-    const favorites = computed(() => store.state.user.data.favoritePhotos.ids)
-
-    const favoritePhotos = computed(() => {
-        return photos.value.filter(photo => favorites.value.includes(photo.id))
+    watchEffect(() => {
+        favoritePhotos.value = photos.value.filter((photo) => {
+            return idsOfFavorites.value.includes(photo.id)
+        })
     })
 </script>
 
 <template>
-    <ViewLayout v-if="store.state.auth.isReady">
+    <ViewLayout v-if="authIsReady">
         <template v-slot:header-content>
             favorites
         </template>
         <template v-slot:main-content>
-            <div 
-                v-for="photo in favoritePhotos" 
-                :key="photo.id"
-                class="photo-container"
-            >   
+            <section class="photos-flex-wrapper">
+                <div 
+                    v-for="photo in favoritePhotos" 
+                    :key="photo.id"
+                    class="img-container"
+                >   
                     <img :src="photo.thumbnailUrl" />
-            </div>
+                </div>
+            </section>
         </template>
     </ViewLayout>
 </template>
 
 <style scoped>
-img{
-    width:150px;
-    margin:0px 0 12px 0;
-    cursor:pointer;
-    font-size:16px;
+.photos-flex-wrapper{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    width:auto;
+    height: auto;
+}
+.img-container{
     border-radius:5px;
-    text-transform: capitalize;
-    color:var(--light-gray);
-    }
+    overflow: hidden;
+    width:150px;
+    height:150px;
+    margin:10px;
+    transition:100ms;
+}
 </style>
