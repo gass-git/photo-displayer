@@ -1,9 +1,8 @@
 <script setup>
     import {computed} from 'vue'
+    import {useStore} from 'vuex'
     import HomeButton from '@/components/buttons/HomeButton.vue'
     import PhotosButton from '@/components/buttons/PhotosButton.vue'
-    import {useStore} from 'vuex'
-    //import router from '@/router/index.js'
     import DashboardButton from '@/components/buttons/DashboardButton.vue';
     import FavoriteButton from '@/components/buttons/FavoritesButton.vue'
     import HeaderButton from '@/components/HeaderButton.vue'
@@ -45,7 +44,7 @@
                 
                 <DashboardButton v-if="userIsLogged"/>
 
-                <FavoriteButton />
+                <FavoriteButton v-if="userIsLogged" />
                 <PhotosButton />
                 <HomeButton />
             </div>     
