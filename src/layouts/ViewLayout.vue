@@ -1,7 +1,6 @@
 <script setup>
     import {computed} from 'vue'
     import {useStore} from 'vuex'
-    import HomeButton from '@/components/buttons/HomeButton.vue'
     import PhotosButton from '@/components/buttons/PhotosButton.vue'
     import DashboardButton from '@/components/buttons/DashboardButton.vue';
     import FavoriteButton from '@/components/buttons/FavoritesButton.vue'
@@ -11,7 +10,8 @@
     
     const
         userIsLogged = computed(() => store.getters['auth/userIsLogged']),
-        userIsNotLogged = !userIsLogged.value;
+        userIsNotLogged = computed(() => !userIsLogged.value),
+        authIsReady = computed(() => store.state.auth.isReady);
 
     function handleLogout(){
         store.dispatch('auth/logoutUser')
@@ -19,9 +19,11 @@
 </script>
 
 <template>
-    <section v-if="store.state.auth.isReady" id="wrapper">
+    <section v-if="authIsReady" id="wrapper">
+        
         <div id="header">
             <slot name="header-content" />
+
             <div id="right-icons-wrapper">
                 <HeaderButton 
                     v-if="userIsNotLogged"
@@ -47,12 +49,13 @@
                 <FavoriteButton v-if="userIsLogged" />
 
                 <PhotosButton />
-                <HomeButton />
             </div>     
         </div>
+
         <div id="main">
             <slot name="main-content" />
         </div>
+
     </section>
 </template>
 

@@ -4,15 +4,13 @@
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import router from '@/router/index.js'
 
-    const store = useStore()
-    const email = ref('')
-    const password = ref('')
+    const [store, email, password] = [useStore(), ref(''), ref('')]
 
     async function handleSubmit(){
         const credentials = {email: email.value, password: password.value}
         
         await store.dispatch('auth/loginUser', credentials)
-        router.push('/home')
+        router.push('/dashboard')
     }
 </script>
 
@@ -30,7 +28,6 @@
                 <button @click="handleSubmit">
                     sign in
                 </button>
-
             </section>
         </template>
     </ViewLayout>

@@ -1,8 +1,8 @@
 <script setup> 
-    import ViewLayout from '@/layouts/ViewLayout.vue'
     import {ref, computed} from 'vue'
     import {useStore} from 'vuex'
     import router from '@/router/index.js'
+    import ViewLayout from '@/layouts/ViewLayout.vue'
 
     const store = useStore()
     const [email, password, repeatedPassword] = [ref(''), ref(''), ref('')]

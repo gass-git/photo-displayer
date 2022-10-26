@@ -24,8 +24,9 @@
         <template v-slot:header-content>
             favorites
         </template>
+
         <template v-slot:main-content>
-            <section class="photos-flex-wrapper">
+            <section v-if="favoritePhotos.length > 0" class="photos-flex-wrapper">
                 <div 
                     v-for="photo in favoritePhotos" 
                     :key="photo.id"
