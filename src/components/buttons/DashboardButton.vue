@@ -6,7 +6,7 @@
     const currentPath = computed(() => useRoute().path)
 
     function pathIsProfile(){
-        return currentPath.value === '/dashboard' ? true : false
+        return currentPath.value.slice(0,10) === '/dashboard' ? true : false
     }
 </script>
 

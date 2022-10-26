@@ -7,9 +7,9 @@
 <style scoped>
 .wrapper{
     display:flex;
+    margin:0 0 20px 0;
     align-items: center;
-    margin:20px 0 0 0;
-    padding:20px;
+    padding:0 0 0 40px;
     color:grey;
     font-size:17px;
     background:white;

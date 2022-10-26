@@ -31,7 +31,13 @@ const routes = [
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: DashboardView
+        component: DashboardView,
+        children:[
+            {
+                path:':option',
+                component: DashboardView
+            }
+        ]
     },
     {
         path:'/favorites',

@@ -24,7 +24,6 @@
             showToast.value = false
         },2500)
     }
-
 </script>
 
 <template>
