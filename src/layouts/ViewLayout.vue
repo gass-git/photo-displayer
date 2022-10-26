@@ -52,6 +52,8 @@
             </div>     
         </div>
 
+        <slot name="alert" />
+
         <div id="main">
             <slot name="main-content" />
         </div>

@@ -7,9 +7,12 @@ import FavoritesView from '@/views/FavoritesView.vue'
 
 const routes = [
     {
+        path:'/',
+        redirect: '/photos/1'
+    },
+    {
         path:'/photos',
         name: 'photos',
-        alias: '/',
         component: PhotosView,
         children:[
             {
