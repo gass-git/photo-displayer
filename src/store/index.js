@@ -3,11 +3,11 @@ import {albumsStore} from './modules/albumsStore'
 import {photosStore} from './modules/photosStore'
 import {authStore} from './modules/authStore'
 import {userStore} from './modules/userStore'
-import {alertStore} from './modules/alertStore'
+import {utilsStore} from './modules/utilsStore'
 
 export default createStore({
   modules: {
-    alert: alertStore,
+    utils: utilsStore,
     photos: photosStore,
     albums: albumsStore,
     auth: authStore,

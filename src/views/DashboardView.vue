@@ -12,8 +12,7 @@
         store = useStore(),
         route = useRoute(),
         option = ref(''),
-        showToast = ref(false),
-        isFirstRender = ref(true);
+        showToast = ref(false);
 
     const    
         username = ref(''),
@@ -22,7 +21,9 @@
 
     const 
         userData = computed(() => store.state.user.data),
-        authIsReady = computed(() => store.getters['auth/userIsLogged']);
+        authIsReady = computed(() => store.getters['auth/userIsLogged']),
+        isAppFirstRender = computed(() => store.getters['utils/isAppFirstRender']);
+
 
     watchEffect(() => {
         username.value = store.state.user.data.information.username
@@ -42,9 +43,7 @@
     })
 
     watch(() => store.getters['user/information'], () => {
-
-        // condition to prevent the toast from triggering on first render
-        isFirstRender.value ? (isFirstRender.value = false) : triggerToast()
+        isAppFirstRender.value ? null : triggerToast()
     })
 
     function handleUpdate(){

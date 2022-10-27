@@ -1,5 +1,5 @@
 <script setup>
-    import {computed, watch, ref, watchEffect} from 'vue'
+    import {computed, watch, ref} from 'vue'
     import {useStore} from 'vuex'
     import AppToast from '@/components/AppToast.vue'
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
@@ -8,7 +8,7 @@
         options = [20, 30, 50],
         store = useStore(),
         showToast = ref(false),
-        isFirstRender = ref(true);
+        isAppFirstRender = computed(() => store.getters['utils/isAppFirstRender']);
 
     const albumsToShow = computed({
         get: () => store.getters['user/albumsToShow'],
@@ -16,15 +16,9 @@
     })
 
     watch(() => store.getters['user/albumsToShow'], () => {
- 
-        // condition to prevent the toast from triggering on first render
-        isFirstRender.value ? (isFirstRender.value = false) : triggerToast()
+        isAppFirstRender.value ? null : triggerToast()
     })
     
-    watchEffect(() => {
-        triggerToast    
-    })
-
     function triggerToast(){
         showToast.value = true
         

@@ -1,5 +1,5 @@
 <script setup>
-    import {onMounted} from 'vue'
+    import {onMounted, computed} from 'vue'
     import {useStore} from 'vuex'
     import AppLayout from '@/layouts/AppLayout.vue'
     import AppName from '@/components/AppName.vue'
@@ -8,6 +8,8 @@
     import {auth} from '@/firebase/config.js'
 
     const store = useStore()
+
+    const appFirstRender = computed(() => store.getters['utils/isAppFirstRender'])
 
     onMounted(() => {
         onAuthStateChanged(auth, (user) => {
@@ -19,6 +21,11 @@
         
         store.dispatch('albums/fetch')
         store.dispatch('photos/fetch')
+        
+        setTimeout(() => {
+            store.commit('utils/setAppFirstRenderOff')
+        }, 2000)
+        
     })
 </script>
 

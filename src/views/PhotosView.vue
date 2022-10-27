@@ -10,7 +10,7 @@
         showAlert = ref(true);
         
     const    
-        alertClosed = computed(() => store.state.alert.closed),
+        alertClosed = computed(() => store.getters['utils/isAlertClosed']),
         userIsLogged = computed(() => store.getters['auth/userIsLogged']),
         selectedAlbumId = computed(() => route.params.albumId);
 
@@ -38,7 +38,7 @@
 
     function handleCloseAlert(){
         showAlert.value = false
-        store.commit('alert/setClosed')
+        store.commit('utils/setAlertClosed')
     }
 
     function isFavorite(photo){
