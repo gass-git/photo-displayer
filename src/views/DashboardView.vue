@@ -1,5 +1,5 @@
 <script setup>
-    import {computed, watchEffect, ref, onMounted} from 'vue'
+    import {computed, watchEffect, ref, watch} from 'vue'
     import {useRoute} from 'vue-router'
     import {useStore} from 'vuex'
     import router from '@/router/index.js'
@@ -11,8 +11,9 @@
     const 
         store = useStore(),
         route = useRoute(),
+        option = ref(''),
         showToast = ref(false),
-        option = ref('');
+        isFirstRender = ref(true);
 
     const    
         username = ref(''),
@@ -38,6 +39,12 @@
             default: 
                 option.value = 'profile'
         }
+    })
+
+    watch(() => store.getters['user/information'], () => {
+
+        // condition to prevent the toast from triggering on first render
+        isFirstRender.value ? (isFirstRender.value = false) : triggerToast()
     })
 
     function handleUpdate(){
@@ -96,11 +103,13 @@
                         <label>website:</label> <input v-model="website"/>
                         <label>about:</label> <textarea rows="4" cols="50" v-model="about"/>
                         
-                        <button @click="handleUpdate">
-                            Update
-                        </button>
+                        <div class="btn-toast-wrapper">
+                            <button @click="handleUpdate">
+                                Update
+                            </button>
+                            <AppToast v-if="showToast" message="Information updated!" />
+                        </div>
                         
-                        <AppToast message="Information updated!" />
 
                     </section>            
                 </template>
@@ -111,6 +120,10 @@
 </template>
 
 <style scoped>
+.btn-toast-wrapper{
+    display:flex;
+    align-items: center;
+}
 .dashboard-nav-wrapper{
     display:flex;
 }
@@ -156,32 +169,29 @@
 }
 #form-wrapper input{
     width:300px;
+    padding:5px 10px 5px 10px;
     margin:0 0 20px 0;
     font-size:17px;
     color:grey;
 }
 #form-wrapper textarea{
     width:300px;
+    padding:5px 10px 5px 10px;
     margin:0 0 20px 0;
     font-size:17px;
     color:grey;
 }
 #form-wrapper button{
+    display:grid;
+    place-items:center;
+    padding:15px 20px 15px 20px;
     cursor:pointer;
-    margin:0 0 0 0;
-    padding:5px;
     width: 100px;
     font-size:17px;
-    border-radius:5px;
+    border-radius:10px;
     border:1px solid blue;
     color:blue;
-    display:grid;
-    text-transform: capitalize;
-    padding:15px 20px 15px 20px;
-    place-items:center;
-    border-radius:10px;
     font-size:18px;
-    margin:0 10px 20px 0;
 }
 #form-wrapper button:hover{
     opacity: 0.6;

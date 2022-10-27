@@ -7,15 +7,13 @@
     const
         options = [20, 30, 50],
         store = useStore(),
-        showToast = ref(false);
+        showToast = ref(false),
+        isFirstRender = ref(true);
 
     const albumsToShow = computed({
         get: () => store.getters['user/albumsToShow'],
         set: (quantity) => store.dispatch('user/updateAlbumsToShow', Number(quantity))
     })
-
-    
-    const isFirstRender = ref(true)
 
     watch(() => store.getters['user/albumsToShow'], () => {
  
@@ -58,6 +56,7 @@
 <style scoped>
 select{
     width:100px;
+    padding:5px 10px 5px 10px;
     margin-left:10px;
     font-size:17px;
     color:grey;

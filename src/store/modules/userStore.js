@@ -115,6 +115,9 @@ export const userStore = {
         getters:{
             albumsToShow(state){
                 return state.data.globalSettings.albumsToShow
+            },
+            information(state){
+                return state.data.information
             }
         }
 }
