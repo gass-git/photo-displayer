@@ -6,11 +6,15 @@
     import NumberOfAlbums from '@/components/NumberOfAlbums.vue';
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
+    import AppToast from '@/components/AppToast.vue'
 
     const 
         store = useStore(),
         route = useRoute(),
-        option = ref(''),
+        showToast = ref(false),
+        option = ref('');
+
+    const    
         username = ref(''),
         website = ref(''),
         about = ref('');
@@ -43,6 +47,14 @@
             about: about.value
         }
         store.dispatch('user/updateInformation', newInfo)
+    }
+
+    function triggerToast(){
+        showToast.value = true
+
+        setTimeout(() => {
+            showToast.value = false
+        },2500)
     }
 </script>
 
@@ -87,6 +99,9 @@
                         <button @click="handleUpdate">
                             Update
                         </button>
+                        
+                        <AppToast message="Information updated!" />
+
                     </section>            
                 </template>
             </WhiteWrapperLayout>
@@ -169,6 +184,10 @@
     margin:0 10px 20px 0;
 }
 #form-wrapper button:hover{
-    opacity: 0.8;
+    opacity: 0.6;
+}
+#form-wrapper button:active{
+    background:blue;
+    color:white;
 }
 </style>

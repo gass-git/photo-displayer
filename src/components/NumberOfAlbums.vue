@@ -1,20 +1,30 @@
 <script setup>
-    import {computed, watch, ref} from 'vue'
+    import {computed, watch, ref, watchEffect} from 'vue'
     import {useStore} from 'vuex'
     import AppToast from '@/components/AppToast.vue'
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
 
-    const options = [20, 30, 50]
-    const store = useStore()
-    const showToast = ref(false)
+    const
+        options = [20, 30, 50],
+        store = useStore(),
+        showToast = ref(false);
 
     const albumsToShow = computed({
         get: () => store.getters['user/albumsToShow'],
         set: (quantity) => store.dispatch('user/updateAlbumsToShow', Number(quantity))
     })
 
+    
+    const isFirstRender = ref(true)
+
     watch(() => store.getters['user/albumsToShow'], () => {
-        triggerToast()
+ 
+        // condition to prevent the toast from triggering on first render
+        isFirstRender.value ? (isFirstRender.value = false) : triggerToast()
+    })
+    
+    watchEffect(() => {
+        triggerToast    
     })
 
     function triggerToast(){
@@ -40,9 +50,7 @@
                     </option>
                 </select>
 
-                <div v-if="showToast">
-                    <AppToast message="value updated!"/>
-                </div>
+                <AppToast v-if="showToast" message="value updated!"/>
         </template>
     </WhiteWrapperLayout>
 </template>
