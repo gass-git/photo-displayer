@@ -82,7 +82,7 @@
                     <section id="form-wrapper">
                         <label>username:</label> <input v-model="username"/>
                         <label>website:</label> <input v-model="website"/>
-                        <label>about:</label> <input v-model="about"/>
+                        <label>about:</label> <textarea rows="4" cols="50" v-model="about"/>
                         
                         <button @click="handleUpdate">
                             Update
@@ -128,7 +128,7 @@
     grid-template-columns: auto;
     color:grey;
     font-size:17px;
-    padding:20px;
+    padding:20px 0 20px 0;
     align-items: center;
     background:white;
     width:auto;
@@ -137,24 +137,36 @@
 }
 #form-wrapper label{
     text-transform: capitalize;
-    margin:0 0 7px 12px;
+    margin:0 0 7px 0;
 }
 #form-wrapper input{
     width:300px;
-    margin:0 0 20px 10px;
+    margin:0 0 20px 0;
+    font-size:17px;
+    color:grey;
+}
+#form-wrapper textarea{
+    width:300px;
+    margin:0 0 20px 0;
     font-size:17px;
     color:grey;
 }
 #form-wrapper button{
     cursor:pointer;
-    margin:0 0 0 10px;
+    margin:0 0 0 0;
     padding:5px;
-    max-width: 300px;
+    width: 100px;
     font-size:17px;
-    background:var(--dark-navy);
     border-radius:5px;
-    border:none;
-    color:white;
+    border:1px solid blue;
+    color:blue;
+    display:grid;
+    text-transform: capitalize;
+    padding:15px 20px 15px 20px;
+    place-items:center;
+    border-radius:10px;
+    font-size:18px;
+    margin:0 10px 20px 0;
 }
 #form-wrapper button:hover{
     opacity: 0.8;
