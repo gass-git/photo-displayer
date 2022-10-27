@@ -13,7 +13,7 @@ export const albumsStore = {
             state.data = data
         },
         updateSelectedId(state, id){
-            state.slectedId = id
+            state.selectedId = id
         },
         updateMaxToShow(state, n){
             state.maxToShow = n
