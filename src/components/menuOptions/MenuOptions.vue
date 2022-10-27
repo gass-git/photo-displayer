@@ -5,12 +5,11 @@
     import FavoritesOption from './children/FavoritesOption.vue'
 
     const store = useStore()
-
-    const 
-        userIsLogged = computed(() => store.getters['auth/userIsLogged']),
-        maxAlbums = computed(() => store.state.albums.maxToShow),
-        allAlbums = computed(() => store.state.albums.data),
-        albumsToShow = computed(() => allAlbums.value.slice(0, maxAlbums.value));
+    const userIsLogged = computed(() => store.getters['auth/userIsLogged'])
+    
+    const albumsToShow = computed(() => {
+        return store.state.albums.data.slice(0, store.getters['user/albumsToShow'])
+    })
 </script>
 
 <template>

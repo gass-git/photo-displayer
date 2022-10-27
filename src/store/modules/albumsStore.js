@@ -3,9 +3,7 @@ export const albumsStore = {
     state(){
         return {
             data:[],
-            selectedId: 1,
-            fetched: false,
-            maxToShow: 20
+            selectedId: 1
         }
     },
     mutations: {
@@ -14,9 +12,6 @@ export const albumsStore = {
         },
         updateSelectedId(state, id){
             state.selectedId = id
-        },
-        updateMaxToShow(state, n){
-            state.maxToShow = n
         }
     },
     actions: {
@@ -33,9 +28,6 @@ export const albumsStore = {
             catch (error){
                 console.log(error)
             }
-        },
-        updateCurrentMax(context, n){
-            context.commit('updateMaxToShow', n)
         }
     },
     getters: {
@@ -47,9 +39,6 @@ export const albumsStore = {
             else{
                 return 'no album selected'
             }
-        },
-        maxToShow(state){
-            return state.maxToShow
         }
     }
 }

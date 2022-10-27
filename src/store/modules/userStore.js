@@ -10,6 +10,7 @@ export const userStore = {
                     favoritePhotos: {
                         ids:[]
                     },
+                    globalSettings: {},
                     information: {}
                 }
             }
@@ -21,8 +22,12 @@ export const userStore = {
                         state.data.uid = payload.data
                         break
 
-                    case 'favoritePhotos': 
+                    case 'favorite photos': 
                         state.data.favoritePhotos = payload.data
+                        break
+
+                    case 'global settings':
+                        state.data.globalSettings = payload.data
                         break
 
                     case 'information': 
@@ -44,12 +49,17 @@ export const userStore = {
 
                 try{   
                     onSnapshot(doc(db, 'users', uid, 'data', 'favorite_photos'), (doc) => {
-                        const favoritePhotos = doc.data()
-                        context.commit('setData', {type: 'favoritePhotos', data: favoritePhotos})        
+                        let favoritePhotos = doc.data()
+                        context.commit('setData', {type: 'favorite photos', data: favoritePhotos})        
                     })
     
+                    onSnapshot(doc(db, 'users', uid, 'data', 'global_settings'), (doc) => {
+                        let globalSettings = doc.data()
+                        context.commit('setData', {type:'global settings', data: globalSettings})
+                    })
+
                     onSnapshot(doc(db, 'users', uid, 'data', 'information'), (doc) => {
-                        const information = doc.data()
+                        let information = doc.data()
                         context.commit('setData', {type: 'information', data: information})        
                     })
                 }
@@ -76,7 +86,21 @@ export const userStore = {
                 catch (error){
                     console.log(error.message)
                 }
+            },
+            async updateAlbumsToShow(context, quantity){
+                let docRef = doc(db, 'users', context.state.data.uid, 'data', 'global_settings')    
+            
+                try{
+                    await updateDoc(docRef, {albumsToShow: quantity})
+                }
+                catch (error){
+                    console.log(error)
+                }
             }
         },
-        getters:{}
+        getters:{
+            albumsToShow(state){
+                return state.data.globalSettings.albumsToShow
+            }
+        }
 }

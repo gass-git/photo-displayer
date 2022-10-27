@@ -9,11 +9,11 @@
     const showToast = ref(false)
 
     const albumsToShow = computed({
-        get: () => store.state.albums.maxToShow,
-        set: (n) => store.dispatch('albums/updateCurrentMax', n)
+        get: () => store.getters['user/albumsToShow'],
+        set: (quantity) => store.dispatch('user/updateAlbumsToShow', Number(quantity))
     })
 
-    watch(() => store.getters['albums/maxToShow'], () => {
+    watch(() => store.getters['user/albumsToShow'], () => {
         triggerToast()
     })
 
@@ -34,7 +34,7 @@
                     <option 
                         v-for="number in options" 
                         :key="number" 
-                        :selected="albumsToShow === store.state.albums.maxToShow"
+                        :selected="albumsToShow === store.getters['user/albumsToShow']"
                     >
                         {{number}}
                     </option>
