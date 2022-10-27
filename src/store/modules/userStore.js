@@ -96,6 +96,20 @@ export const userStore = {
                 catch (error){
                     console.log(error)
                 }
+            },
+            async updateInformation(context, newInfo){
+                let docRef = doc(db, 'users', context.state.data.uid, 'data', 'information') 
+                
+                try{
+                    await updateDoc(docRef, { 
+                        username: newInfo.username,
+                        website: newInfo.website,
+                        about: newInfo.about
+                    })
+                }
+                catch (error){
+                    console.log(error)
+                }
             }
         },
         getters:{

@@ -1,5 +1,5 @@
 <script setup>
-    import {computed, watchEffect, ref} from 'vue'
+    import {computed, watchEffect, ref, onMounted} from 'vue'
     import {useRoute} from 'vue-router'
     import {useStore} from 'vuex'
     import router from '@/router/index.js'
@@ -10,13 +10,20 @@
     const 
         store = useStore(),
         route = useRoute(),
-        option = ref('');
+        option = ref(''),
+        username = ref(''),
+        website = ref(''),
+        about = ref('');
 
     const 
         userData = computed(() => store.state.user.data),
         authIsReady = computed(() => store.getters['auth/userIsLogged']);
 
     watchEffect(() => {
+        username.value = store.state.user.data.information.username
+        website.value = store.state.user.data.information.website
+        about.value = store.state.user.data.information.about
+
         switch(route.params.option){
             case 'settings': 
                 option.value = 'settings'
@@ -28,6 +35,15 @@
                 option.value = 'profile'
         }
     })
+
+    function handleUpdate(){
+        let newInfo = {
+            username: username.value,
+            website: website.value,
+            about: about.value
+        }
+        store.dispatch('user/updateInformation', newInfo)
+    }
 </script>
 
 <template>
@@ -60,6 +76,21 @@
             </WhiteWrapperLayout>
 
             <NumberOfAlbums v-if="option === 'settings'"/>
+
+            <WhiteWrapperLayout v-if="option === 'settings'">
+                <template v-slot:content>
+                    <section id="form-wrapper">
+                        <label>username:</label> <input v-model="username"/>
+                        <label>website:</label> <input v-model="website"/>
+                        <label>about:</label> <input v-model="about"/>
+                        
+                        <button @click="handleUpdate">
+                            Update
+                        </button>
+                    </section>            
+                </template>
+            </WhiteWrapperLayout>
+
         </template>
     </ViewLayout>
 </template>
@@ -91,5 +122,41 @@
 }
 .color-blue{
     color:blue;
+}
+#form-wrapper{
+    display:grid;
+    grid-template-columns: auto;
+    color:grey;
+    font-size:17px;
+    padding:20px;
+    align-items: center;
+    background:white;
+    width:auto;
+    height:auto;
+    border-radius:10px;
+}
+#form-wrapper label{
+    text-transform: capitalize;
+    margin:0 0 7px 12px;
+}
+#form-wrapper input{
+    width:300px;
+    margin:0 0 20px 10px;
+    font-size:17px;
+    color:grey;
+}
+#form-wrapper button{
+    cursor:pointer;
+    margin:0 0 0 10px;
+    padding:5px;
+    max-width: 300px;
+    font-size:17px;
+    background:var(--dark-navy);
+    border-radius:5px;
+    border:none;
+    color:white;
+}
+#form-wrapper button:hover{
+    opacity: 0.8;
 }
 </style>
