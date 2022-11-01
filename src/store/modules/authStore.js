@@ -1,6 +1,7 @@
-import {auth} from '@/firebase/config.js'
+import {auth,db} from '@/firebase/config.js'
 import {signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {setDoc, doc} from 'firebase/firestore'
 
 export const authStore = {
     namespaced: true,
@@ -21,9 +22,26 @@ export const authStore = {
     actions:{
         async registerUser(context, {email, password}){
             try{
-                const res = await createUserWithEmailAndPassword(auth, email, password)
-                const userAuthData = res.user 
+                const 
+                    res = await createUserWithEmailAndPassword(auth, email, password),
+                    userAuthData = res.user,
+                    uid = res.user.uid;
+
                 context.commit('setData', userAuthData) 
+
+                await setDoc(doc(db, 'users', uid), {
+                    favoritePhotos:{
+                        ids:[]
+                    },
+                    globalSettings:{
+                        albumsToShow:50
+                    },
+                    information:{
+                        about:'',
+                        username:'',
+                        website:''
+                    }
+                })
             }
             catch (error){
                 console.log(error)
@@ -44,7 +62,7 @@ export const authStore = {
             try{
                 await signOut(auth)
                 context.commit('setData', null)
-                context.commit('user/setData', {type: 'erase data'}, {root:true})
+                context.commit('user/resetAll', null, {root:true})
             }
             catch (error){
                 console.log(error.message)

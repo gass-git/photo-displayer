@@ -4,8 +4,8 @@ export const photosStore = {
     namespaced: true,
     state(){
         return {
-            data: []
-        }
+            data:[]
+          }
     },
     mutations: {
         setData(state, payload){

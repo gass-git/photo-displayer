@@ -6,6 +6,7 @@
 
     const store = useStore()
     const userIsLogged = computed(() => store.getters['auth/userIsLogged'])
+    const numberOfAlbumsToShow = computed(() => store.state.user.data.globalSettings.albumsToShow)
     
     const albumsToShow = computed(() => {
         return store.state.albums.data.slice(0, store.getters['user/albumsToShow'])

@@ -9,7 +9,7 @@
 
     const
         photos = computed(() => store.state.photos.data),
-        idsOfFavorites = computed(() => store.state.user.data.favoritePhotos.ids),
+        idsOfFavorites = computed(() => store.state.user.favoritePhotos.ids),
         authIsReady = computed(() => store.state.auth.isReady);
 
     watchEffect(() => {

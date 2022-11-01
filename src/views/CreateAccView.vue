@@ -33,9 +33,10 @@
     async function handleSubmit(){
         if(conditionsAreMet.value){
             let credentials = {email: email.value, password: password.value}
+            
             try{
                 await store.dispatch('auth/registerUser', credentials)
-                router.push('/home')
+                router.push('/dashboard')
             }
             catch (error){
                 console.log(error)

@@ -5,7 +5,7 @@
 
     const route = useRoute()
     const store = useStore()
-    const favorites = computed(() => store.state.user.data.favoritePhotos.ids)
+    const favorites = computed(() => store.state.user.favoritePhotos.ids)
     const isSelected = computed(() => route.path == '/favorites')
 </script>
 

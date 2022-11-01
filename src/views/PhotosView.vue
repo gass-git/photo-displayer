@@ -6,30 +6,27 @@
 
     const
         store = useStore(),
-        route = useRoute(),
-        showAlert = ref(true);
+        route = useRoute();
         
     const    
-        alertClosed = computed(() => store.getters['utils/isAlertClosed']),
+        showAlert = computed(() => store.getters['utils/show']),
         userIsLogged = computed(() => store.getters['auth/userIsLogged']),
         selectedAlbumId = computed(() => route.params.albumId);
 
     const    
         albumPhotos = computed(() => store.getters['photos/fromSelectedAlbum'](selectedAlbumId.value)),
         albumTitle = computed(() => store.getters['albums/title']),
-        favoritePhotos = computed(() => store.state.user.data.favoritePhotos);
+        favoritePhotos = computed(() => store.state.user.favoritePhotos);
 
     watchEffect(() => {
         store.commit('albums/updateSelectedId', selectedAlbumId)
 
-        if(userIsLogged.value || alertClosed.value){
-            showAlert.value = false
-        }
+        if(userIsLogged.value) store.commit('utils/setShow', false)
     })
 
     function handlePhotoClick(photo){
-        let idFound = favoritePhotos.value.ids.find(id => id == photo.id)
-
+        let idFound = favoritePhotos.value.ids.some(id => id == photo.id)
+       
         if(idFound) 
             store.dispatch('user/removeFavoritePhoto', photo.id);
         else 
@@ -37,8 +34,7 @@
     }
 
     function handleCloseAlert(){
-        showAlert.value = false
-        store.commit('utils/setAlertClosed')
+        store.commit('utils/setShow', false)
     }
 
     function isFavorite(photo){

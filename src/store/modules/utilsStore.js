@@ -2,17 +2,13 @@ export const utilsStore = {
     namespaced: true,
     state(){
         return {
-            alertClosed: false,
-            appRendersCount: 0,
+            show: true,
             appFirstRender: true
-        }
+          }
     },
     mutations: {
-        setAlertClosed(state){
-            state.alertClosed = true
-        },
-        incrementAppRendersCount(state){
-            state.appRendersCount += 1
+        setShow(state, bool){
+            state.show = bool
         },
         setAppFirstRenderOff(state){
             state.appFirstRender = false
@@ -22,8 +18,8 @@ export const utilsStore = {
         isAppFirstRender(state){
             return state.appFirstRender
         },
-        isAlertClosed(state){
-            return state.alertClosed
+        show(state){
+            return state.show
         }
     }
 }

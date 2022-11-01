@@ -7,16 +7,16 @@
     import {onAuthStateChanged} from 'firebase/auth'
     import {auth} from '@/firebase/config.js'
 
-    const store = useStore()
-
-    const appFirstRender = computed(() => store.getters['utils/isAppFirstRender'])
+    const 
+        store = useStore(),
+        appFirstRender = computed(() => store.getters['utils/isAppFirstRender']);
 
     onMounted(() => {
         onAuthStateChanged(auth, (user) => {
             store.commit('auth/setData', user)
             store.commit('auth/setToReady', true)
 
-            user !== null ? store.dispatch('user/load', user.uid) : null
+            user ? store.dispatch('user/load', user.uid) : null
         })
         
         store.dispatch('albums/fetch')
@@ -25,7 +25,6 @@
         setTimeout(() => {
             store.commit('utils/setAppFirstRenderOff')
         }, 2000)
-        
     })
 </script>
 

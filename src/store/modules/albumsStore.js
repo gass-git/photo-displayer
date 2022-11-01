@@ -4,7 +4,7 @@ export const albumsStore = {
         return {
             data:[],
             selectedId: 1
-        }
+          }
     },
     mutations: {
         setData(state, data){
