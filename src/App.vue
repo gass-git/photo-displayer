@@ -7,9 +7,7 @@
     import {onAuthStateChanged} from 'firebase/auth'
     import {auth} from '@/firebase/config.js'
 
-    const 
-        store = useStore(),
-        appFirstRender = computed(() => store.getters['utils/isAppFirstRender']);
+    const store = useStore();
 
     onMounted(() => {
         onAuthStateChanged(auth, (user) => {
