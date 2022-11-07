@@ -4,7 +4,7 @@
 
     const
         store = useStore(),
-        props = defineProps({userIsLogged: Boolean, selectedAlbumId: Number}),
+        props = defineProps({userIsLogged: Boolean, selectedAlbumId: String}),
         favoritePhotos = computed(() => store.state.user.favoritePhotos),
         albumPhotos = computed(() => store.getters['photos/fromSelectedAlbum'](props.selectedAlbumId));
     
