@@ -2,11 +2,11 @@
     import {defineProps, computed} from 'vue'
     import {useStore} from 'vuex'
 
-    const store = useStore()
-    const props = defineProps({userIsLogged: Boolean, selectedAlbumId: Number})
-
-    const favoritePhotos = computed(() => store.state.user.favoritePhotos)
-    const albumPhotos = computed(() => store.getters['photos/fromSelectedAlbum'](props.selectedAlbumId))
+    const
+        store = useStore(),
+        props = defineProps({userIsLogged: Boolean, selectedAlbumId: Number}),
+        favoritePhotos = computed(() => store.state.user.favoritePhotos),
+        albumPhotos = computed(() => store.getters['photos/fromSelectedAlbum'](props.selectedAlbumId));
     
     function handlePhotoClick(photo){
         let idFound = favoritePhotos.value.ids.some(id => id == photo.id)
@@ -16,7 +16,7 @@
         else 
             store.dispatch('user/addFavoritePhoto', photo.id);
     }
-
+    
     function isFavorite(photo){
         let favoriteFound = favoritePhotos.value.ids.find(id => id === photo.id)
         return favoriteFound ? true : false
