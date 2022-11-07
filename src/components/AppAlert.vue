@@ -68,4 +68,8 @@ a:hover{
     color:rgb(255, 255, 255);
     cursor:pointer;
 }
+.alert-close-icon-wrapper span:hover{
+    background:rgb(255, 255, 255,0.5);
+    color:blue;
+}
 </style>
