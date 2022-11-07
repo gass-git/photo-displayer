@@ -1,4 +1,4 @@
-import {createStore} from 'vuex'
+import {createStore, storeKey} from 'vuex'
 import {albumsStore} from './modules/albumsStore'
 import {photosStore} from './modules/photosStore'
 import {authStore} from './modules/authStore'
@@ -14,3 +14,4 @@ export default createStore({
     user: userStore
   }
 })
+

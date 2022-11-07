@@ -1,5 +1,5 @@
 <script setup>
-    import {onMounted, computed} from 'vue'
+    import {onMounted} from 'vue'
     import {useStore} from 'vuex'
     import AppLayout from '@/layouts/AppLayout.vue'
     import AppName from '@/components/AppName.vue'
