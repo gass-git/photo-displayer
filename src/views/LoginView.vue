@@ -9,7 +9,7 @@
     async function handleSubmit(){
         const credentials = {email: email.value, password: password.value}
         
-        await store.dispatch('auth/loginUser', credentials)
+        await store.dispatch('auth/loginUser', credentials);
         router.push('/dashboard')
     }
 </script>
@@ -46,17 +46,17 @@
     height:auto;
     border-radius:10px;
 }
-#form-wrapper label{
+label{
     text-transform: capitalize;
     margin:0 0 7px 12px;
 }
-#form-wrapper input{
+input{
     width:300px;
     margin:0 0 20px 10px;
     font-size:17px;
     color:grey;
 }
-#form-wrapper button{
+button{
     cursor:pointer;
     margin:0 0 0 10px;
     padding:5px;
@@ -67,7 +67,7 @@
     border:none;
     color:white;
 }
-#form-wrapper button:hover{
+button:hover{
     opacity: 0.8;
 }
 </style>

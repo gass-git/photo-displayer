@@ -5,8 +5,8 @@
     import router from '@/router/index.js'
     import NumberOfAlbums from '@/components/NumberOfAlbums.vue';
     import ViewLayout from '@/layouts/ViewLayout.vue'
-    import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
     import UserInfo from '@/components/UserInfo.vue'
+    import UserGreeting from '@/components/UserGreeting.vue'
 
     const 
         route = useRoute(),
@@ -14,7 +14,6 @@
         option = ref('');
         
     const 
-        userData = computed(() => store.state.user),
         authIsReady = computed(() => store.getters['auth/userIsLogged']);
 
     watchEffect(() => {
@@ -50,19 +49,8 @@
                 <div @click="router.push('/dashboard/settings')" class="selected">settings</div>
             </section>
 
-            <WhiteWrapperLayout v-if="option === 'profile'">
-                <template v-slot:content>
-                    <span class="username">
-                        Hello <span class="color-blue">{{userData.information.username}}</span>
-                    </span>
-                    <span>
-                        , welcome to your Dashboard !
-                    </span>
-                </template>
-            </WhiteWrapperLayout>
-
+            <UserGreeting v-if="option === 'profile'" />
             <NumberOfAlbums v-if="option === 'settings'"/>
-
             <UserInfo v-if="option === 'settings'"/>
 
         </template>
@@ -90,11 +78,5 @@
 .selected{
     background:blue;
     color:white;
-}
-.username{
-    text-transform: capitalize;
-}
-.color-blue{
-    color:blue;
 }
 </style>
