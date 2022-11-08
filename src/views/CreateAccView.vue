@@ -7,7 +7,8 @@
     const 
         store = useStore(),
         [email, password, repeatedPassword] = [ref(''), ref(''), ref('')],
-        alert = ref({show: false, text: ''});
+        alert = ref({show: false, text: ''}),
+        registrationError = computed(() => store.state.auth.registrationError)
 
     const emailValid = computed(() => {
         // eslint-disable-next-line
@@ -33,15 +34,10 @@
 
     async function submit(){ 
         if(conditionsAreMet.value){
-            let credentials = {email: email.value, password: password.value}
+            const credentials = {email: email.value, password: password.value}
             
-            try{
-                await store.dispatch('auth/registerUser', credentials)
-                router.push('/dashboard')
-            }
-            catch (error){
-                console.log(error)
-            }
+            await store.dispatch('auth/registerUser', credentials)
+            registrationError.value ? null : router.push('/dashboard')
         }
         else if(email.value === ''){
             alert.value.show = true
@@ -89,6 +85,9 @@
                 
                 <div class="msg-container">
                     <span v-if="alert.show" class="red">{{alert.text}}</span>
+                    <span v-else-if="registrationError === 'auth/email-already-in-use'" class="red">
+                        The email is already in use
+                    </span>
                 </div>
 
                 <button>Create Account</button>

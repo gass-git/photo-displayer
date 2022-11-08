@@ -12,7 +12,7 @@
         const credentials = {email: email.value, password: password.value}
         
         await store.dispatch('auth/loginUser', credentials)
-        loginError.value === '' ? router.push('/dashboard') : null
+        loginError.value ? null : router.push('/dashboard')
     }
 </script>
 
@@ -31,7 +31,7 @@
                     <span v-if="loginError === 'auth/user-not-found'" class="red">
                         User not found
                     </span>
-                    <span v-if="loginError === 'auth/wrong-password'" class="red">
+                    <span v-else-if="loginError === 'auth/wrong-password'" class="red">
                         You entered a wrong password
                     </span>
                 </div>

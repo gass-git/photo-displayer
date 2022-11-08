@@ -9,7 +9,8 @@ export const authStore = {
         return {
             data: null,
             isReady: false,
-            loginError: ''
+            loginError: null,
+            registrationError: null
         }
     },
     mutations:{
@@ -23,11 +24,19 @@ export const authStore = {
             state.loginError = payload
         },
         resetLoginError(state){
-            state.loginError = ''
+            state.loginError = null
+        },
+        setRegistrationError(state, payload){
+            state.registrationError = payload
+        },
+        resetRegistrationError(state){
+            state.registrationError = null
         }
     },
     actions:{
         async registerUser(context, {email, password}){
+            context.commit('resetRegistrationError')
+
             try{
                 const 
                     res = await createUserWithEmailAndPassword(auth, email, password),
@@ -51,7 +60,7 @@ export const authStore = {
                 })
             }
             catch (error){
-                console.log(error)
+                context.commit('setRegistrationError', error.code)
             }
         },
         async loginUser(context, {email, password}){
