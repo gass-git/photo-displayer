@@ -21,20 +21,17 @@
         </template>
 
         <template v-slot:main-content>
-            <section id="form-wrapper">
+            <form @submit.prevent="handleSubmit" @keyup.enter="handleSubmit">
                 <label>email:</label> <input v-model="email" />
                 <label>password:</label> <input v-model="password" type="password"/>
-                
-                <button @click="handleSubmit">
-                    sign in
-                </button>
-            </section>
+                <button>sign in</button>
+            </form>
         </template>
     </ViewLayout>
 </template>
 
 <style scoped>
-#form-wrapper{
+form{
     display:grid;
     grid-template-columns: auto;
     color:grey;
