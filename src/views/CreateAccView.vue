@@ -31,7 +31,7 @@
         }
     })
 
-    async function handleSubmit(){
+    async function submit(){
         if(conditionsAreMet.value){
             let credentials = {email: email.value, password: password.value}
             
@@ -82,27 +82,23 @@
         </template>
 
         <template v-slot:main-content>
-            <form id="form-wrapper" @submit.prevent="handleSubmit">
+            <form @submit.prevent="submit" @keyup.enter="submit">
                 <label>email:</label> <input v-model="email" />
                 <label>password:</label> <input v-model="password" type="password"/>
                 <label>repeat password:</label> <input v-model="repeatedPassword"  type="password" />
                 
                 <div class="msg-container">
-                    <span v-if="alert.show" class="red">
-                        {{alert.text}}
-                    </span>
+                    <span v-if="alert.show" class="red">{{alert.text}}</span>
                 </div>
 
-                <button>
-                    Create Account
-                </button>
+                <button>Create Account</button>
             </form>
         </template>
     </ViewLayout>
 </template>
 
 <style scoped>
-#form-wrapper{
+form{
     display:grid;
     grid-template-columns: auto;
     color:grey;
