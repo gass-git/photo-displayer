@@ -1,16 +1,18 @@
 <script setup>
-    import {ref} from 'vue'
+    import {ref, computed} from 'vue'
     import {useStore} from 'vuex'
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import router from '@/router/index.js'
 
-    const [store, email, password] = [useStore(), ref(''), ref('')]
+    const 
+        [store, email, password] = [useStore(), ref(''), ref('')],
+        loginError = computed(() => store.state.auth.loginError);
 
-    async function handleSubmit(){
+    async function submit(){
         const credentials = {email: email.value, password: password.value}
         
-        await store.dispatch('auth/loginUser', credentials);
-        router.push('/dashboard')
+        await store.dispatch('auth/loginUser', credentials)
+        loginError.value === '' ? router.push('/dashboard') : null
     }
 </script>
 
@@ -21,9 +23,19 @@
         </template>
 
         <template v-slot:main-content>
-            <form @submit.prevent="handleSubmit" @keyup.enter="handleSubmit">
+            <form @submit.prevent="submit">
                 <label>email:</label> <input v-model="email" />
                 <label>password:</label> <input v-model="password" type="password"/>
+
+                <div class="msg-container">
+                    <span v-if="loginError === 'auth/user-not-found'" class="red">
+                        User not found
+                    </span>
+                    <span v-if="loginError === 'auth/wrong-password'" class="red">
+                        You entered a wrong password
+                    </span>
+                </div>
+
                 <button>sign in</button>
             </form>
         </template>
@@ -66,5 +78,11 @@ button{
 }
 button:hover{
     opacity: 0.8;
+}
+.msg-container{
+    padding:10px 20px 30px 20px;
+}
+.red{
+    color:red;
 }
 </style>

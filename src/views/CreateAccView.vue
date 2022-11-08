@@ -31,7 +31,7 @@
         }
     })
 
-    async function submit(){
+    async function submit(){ 
         if(conditionsAreMet.value){
             let credentials = {email: email.value, password: password.value}
             
@@ -82,7 +82,7 @@
         </template>
 
         <template v-slot:main-content>
-            <form @submit.prevent="submit" @keyup.enter="submit">
+            <form @submit.prevent="submit">
                 <label>email:</label> <input v-model="email" />
                 <label>password:</label> <input v-model="password" type="password"/>
                 <label>repeat password:</label> <input v-model="repeatedPassword"  type="password" />

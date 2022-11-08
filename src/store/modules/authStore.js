@@ -8,7 +8,8 @@ export const authStore = {
     state(){
         return {
             data: null,
-            isReady: false
+            isReady: false,
+            loginError: ''
         }
     },
     mutations:{
@@ -17,6 +18,12 @@ export const authStore = {
         },
         setToReady(state, payload){
             state.isReady = payload
+        },
+        setLoginError(state, payload){
+            state.loginError = payload
+        },
+        resetLoginError(state){
+            state.loginError = ''
         }
     },
     actions:{
@@ -48,6 +55,8 @@ export const authStore = {
             }
         },
         async loginUser(context, {email, password}){
+            context.commit('resetLoginError')
+
             try{
                 const res = await signInWithEmailAndPassword(auth, email, password)
                 const userAuthData = res.user
@@ -55,7 +64,7 @@ export const authStore = {
                 context.dispatch('user/load', res.user.uid, {root: true})
             }
             catch (error){
-                console.log(error.message)
+                context.commit('setLoginError', error.code)
             }
         },
         async logoutUser(context){
