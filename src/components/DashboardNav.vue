@@ -1,24 +1,23 @@
 <script setup>
-    import {ref, watchEffect, defineProps} from 'vue'
-    import {useRoute} from 'vue-router'
+    import {defineProps} from 'vue'
     import router from '@/router/index.js'
 
     const props = defineProps({option: String})
+
+    function handleClass(element){
+        if(element === props.option) return 'selected'
+        else return 'non-selected'
+    }
 </script>
 
 <template>
-    <section v-if="props.option === 'profile'" class="dashboard-nav-wrapper">
-        <div @click="router.push('/dashboard')" class="selected">profile</div>
-        <div @click="router.push('/dashboard/settings')" class="non-selected">settings</div>
-    </section>
-
-    <section v-if="props.option === 'settings'" class="dashboard-nav-wrapper">
-        <div @click="router.push('/dashboard')" class="non-selected">profile</div>
-        <div @click="router.push('/dashboard/settings')" class="selected">settings</div>
+    <section class="dashboard-nav-wrapper">
+        <div @click="router.push('/dashboard')" :class="handleClass('profile')">profile</div>
+        <div @click="router.push('/dashboard/settings')" :class="handleClass('settings')">settings</div>
     </section>
 </template>
 
-<style>
+<style scoped>
 .dashboard-nav-wrapper{
     display:flex;
 }
