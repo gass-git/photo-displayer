@@ -9,9 +9,7 @@
     import DashboardNav from '@/components/DashboardNav.vue'
 
     const 
-        route = useRoute(),
-        store = useStore(),
-        navOption = ref(''),
+        [route, store, navOption] = [useRoute(), useStore(), ref('')],
         authIsReady = computed(() => store.getters['auth/userIsLogged']);
 
     watchEffect(() => {

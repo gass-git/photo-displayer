@@ -3,9 +3,7 @@
     import {useStore} from 'vuex'
     import ViewLayout from '@/layouts/ViewLayout.vue'
 
-    const 
-        store = useStore(),
-        favoritePhotos = ref([]);
+    const [store, favoritePhotos] = [useStore(), ref([])]
 
     const
         photos = computed(() => store.state.photos.data),
