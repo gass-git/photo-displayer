@@ -1,34 +1,31 @@
 <script setup>
-    import {computed, watchEffect, ref, watch} from 'vue'
+    import {computed, watchEffect, ref} from 'vue'
     import {useRoute} from 'vue-router'
     import {useStore} from 'vuex'
-    import router from '@/router/index.js'
     import NumberOfAlbums from '@/components/NumberOfAlbums.vue';
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import UserInfo from '@/components/UserInfo.vue'
     import UserGreeting from '@/components/UserGreeting.vue'
+    import DashboardNav from '@/components/DashboardNav.vue'
 
     const 
         route = useRoute(),
         store = useStore(),
-        option = ref('');
-        
-    const 
+        navOption = ref(''),
         authIsReady = computed(() => store.getters['auth/userIsLogged']);
 
     watchEffect(() => {
         switch(route.params.option){
             case 'settings': 
-                option.value = 'settings'
+                navOption.value = 'settings'
                 break
             case undefined: 
-                option.value = 'profile'
+                navOption.value = 'profile'
                 break
             default: 
-                option.value = 'profile'
+                navOption.value = 'profile'
         }
     })
-
 </script>
 
 <template>
@@ -38,45 +35,16 @@
         </template>
 
         <template v-slot:main-content>
-        
-            <section v-if="option === 'profile'" class="dashboard-nav-wrapper">
-                <div @click="router.push('/dashboard')" class="selected">profile</div>
-                <div @click="router.push('/dashboard/settings')" class="non-selected">settings</div>
+            <DashboardNav :option="navOption" />
+
+            <section v-if="navOption === 'profile'">
+                <UserGreeting />
             </section>
 
-            <section v-if="option === 'settings'" class="dashboard-nav-wrapper">
-                <div @click="router.push('/dashboard')" class="non-selected">profile</div>
-                <div @click="router.push('/dashboard/settings')" class="selected">settings</div>
+            <section v-if="navOption === 'settings'">
+                <NumberOfAlbums />
+                <UserInfo />
             </section>
-
-            <UserGreeting v-if="option === 'profile'" />
-            <NumberOfAlbums v-if="option === 'settings'"/>
-            <UserInfo v-if="option === 'settings'"/>
-
         </template>
     </ViewLayout>
 </template>
-
-<style scoped>
-.dashboard-nav-wrapper{
-    display:flex;
-}
-.dashboard-nav-wrapper > div{
-    display:grid;
-    text-transform: capitalize;
-    padding:15px 20px 15px 20px;
-    min-width: 100px;
-    place-items:center;
-    border-radius:10px;
-    font-size:18px;
-    margin:0 10px 20px 0;
-}
-.non-selected:hover{
-    background-color: rgb(189, 224, 255);
-    cursor:pointer;
-}
-.selected{
-    background:blue;
-    color:white;
-}
-</style>
