@@ -7,13 +7,22 @@
     import UserInfo from '@/components/UserInfo.vue'
     import UserGreeting from '@/components/UserGreeting.vue'
     import DashboardNav from '@/components/DashboardNav.vue'
+    import router from '@/router/index.js'
 
     const 
         [route, store, navOption] = [useRoute(), useStore(), ref('')],
-        authIsReady = computed(() => store.getters['auth/userIsLogged']);
+        authIsReady = computed(() => store.state.auth.isReady),
+        userIsLogged = computed(() => store.getters['auth/userIsLogged']);
 
     watchEffect(() => {
-        switch(route.params.option){
+        if(userIsLogged.value)
+            switcher(route.params.option)
+        else
+            router.go(-1)
+    })
+
+    function switcher(option){
+        switch(option){
             case 'settings': 
                 navOption.value = 'settings'
                 break
@@ -23,7 +32,7 @@
             default: 
                 navOption.value = 'profile'
         }
-    })
+    }
 </script>
 
 <template>
