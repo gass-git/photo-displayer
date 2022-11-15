@@ -33,7 +33,7 @@ export const albumsStore = {
     getters: {
         title(state){
             if(state.data.length > 0){
-                let album = state.data.find(album => album.id == state.selectedId)
+                const album = state.data.find(album => album.id == state.selectedId)
                 return album.title
             }
             else{
