@@ -20,16 +20,16 @@ export const userStore = {
         }
     },
     mutations:{
-        setUID(state, payload){
+        setUID(state, payload: any){
             state.uid = payload
         },
-        setFavoritePhotos(state, payload){
+        setFavoritePhotos(state, payload: any){
             state.favoritePhotos = payload
         },
-        setGlobalSettings(state, payload){
+        setGlobalSettings(state, payload: any){
             state.globalSettings = payload
         },
-        setInfo(state, payload){
+        setInfo(state, payload: any){
             state.information = payload
         },
         resetAll(state){
@@ -40,7 +40,7 @@ export const userStore = {
         }
     },
     actions:{
-        async load(context, uid){
+        async load(context, uid:string){
             context.commit('setUID', uid)
 
             try{   
@@ -54,7 +54,7 @@ export const userStore = {
                 console.log(error.message)
             }
         },
-        async addFavoritePhoto(context, photoId){
+        async addFavoritePhoto(context, photoId:string){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "favoritePhotos.ids": arrayUnion(photoId)
@@ -64,7 +64,7 @@ export const userStore = {
                 console.log(error.message)
             }
         },
-        async removeFavoritePhoto(context, photoId){
+        async removeFavoritePhoto(context, photoId:string){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "favoritePhotos.ids": arrayRemove(photoId)
@@ -74,7 +74,7 @@ export const userStore = {
                 console.log(error.message)
             }
         },
-        async updateAlbumsToShow(context, quantity){
+        async updateAlbumsToShow(context, quantity:number){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "globalSettings.albumsToShow": quantity

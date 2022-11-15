@@ -14,19 +14,19 @@ export const authStore = {
         }
     },
     mutations:{
-        setData(state, payload){
+        setData(state, payload:any){
             state.data = payload
         },
-        setToReady(state, payload){
+        setToReady(state, payload:any){
             state.isReady = payload
         },
-        setLoginError(state, payload){
+        setLoginError(state, payload:any){
             state.loginError = payload
         },
         resetLoginError(state){
             state.loginError = null
         },
-        setRegistrationError(state, payload){
+        setRegistrationError(state, payload:any){
             state.registrationError = payload
         },
         resetRegistrationError(state){

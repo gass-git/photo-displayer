@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import {defineProps, computed} from 'vue'
     import {useStore} from 'vuex'
+    import Photo from '@/types/photo'
 
     const
         store = useStore(),
@@ -8,8 +9,8 @@
         favoritePhotos = computed(() => store.state.user.favoritePhotos),
         albumPhotos = computed(() => store.getters['photos/fromSelectedAlbum'](props.selectedAlbumId));
     
-    function handlePhotoClick(photo){
-        let idFound = favoritePhotos.value.ids.some((id:string) => id == photo.id)
+    function handlePhotoClick(photo:Photo){
+        let idFound = favoritePhotos.value.ids.some((id:string) => Number(id) === photo.id)
        
         if(idFound) 
             store.dispatch('user/removeFavoritePhoto', photo.id);
@@ -17,8 +18,8 @@
             store.dispatch('user/addFavoritePhoto', photo.id);
     }
     
-    function isFavorite(photo){
-        let favoriteFound = favoritePhotos.value.ids.find(id => id === photo.id)
+    function isFavorite(photo:Photo){
+        let favoriteFound = favoritePhotos.value.ids.find((id:number) => id === photo.id)
         return favoriteFound ? true : false
     }
 </script>

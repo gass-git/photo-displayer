@@ -7,7 +7,7 @@ export const utilsStore = {
           }
     },
     mutations: {
-        setShow(state, bool){
+        setShow(state, bool:boolean){
             state.show = bool
         },
         setAppFirstRenderOff(state){

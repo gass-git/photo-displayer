@@ -8,10 +8,7 @@
         store = useStore(),
         username = ref(''),
         website = ref(''),
-        about = ref('');
-
-    const 
-        isAppFirstRender = computed(() => store.getters['utils/isAppFirstRender']),
+        about = ref(''),
         showToast = ref(false);
 
     watchEffect(() => {

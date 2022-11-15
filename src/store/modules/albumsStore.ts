@@ -1,3 +1,5 @@
+import Album from '@/types/album'
+
 export const albumsStore = {
     namespaced: true,
     state(){
@@ -10,7 +12,7 @@ export const albumsStore = {
         setData(state, data){
             state.data = data
         },
-        updateSelectedId(state, id){
+        updateSelectedId(state, id:number){
             state.selectedId = id
         }
     },
@@ -33,7 +35,7 @@ export const albumsStore = {
     getters: {
         title(state){
             if(state.data.length > 0){
-                const album = state.data.find(album => album.id == state.selectedId)
+                const album = state.data.find((album:Album) => album.id == state.selectedId)
                 return album.title
             }
             else{

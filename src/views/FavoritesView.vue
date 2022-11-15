@@ -2,8 +2,11 @@
     import {computed, watchEffect, ref} from 'vue'
     import {useStore} from 'vuex'
     import ViewLayout from '@/layouts/ViewLayout.vue'
+    import Photo from '@/types/photo'
 
-    const [store, favoritePhotos] = [useStore(), ref([])]
+    const 
+        store = useStore(),
+        favoritePhotos = ref<Photo[]>([]);
 
     const
         photos = computed(() => store.state.photos.data),
@@ -11,7 +14,7 @@
         authIsReady = computed(() => store.state.auth.isReady);
 
     watchEffect(() => {
-        favoritePhotos.value = photos.value.filter((photo) => {
+        favoritePhotos.value = photos.value.filter((photo:Photo) => {
             return idsOfFavorites.value.includes(photo.id)
         })
     })

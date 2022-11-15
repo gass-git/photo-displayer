@@ -1,3 +1,5 @@
+import Photo from '@/types/photo'
+
 const PHOTOS_API = 'https://jsonplaceholder.typicode.com/photos'
 
 export const photosStore = {
@@ -5,10 +7,10 @@ export const photosStore = {
     state(){
         return {
             data:[]
-          }
+        }
     },
     mutations: {
-        setData(state, payload){
+        setData(state, payload: Photo){
             state.data = payload
         }
     },
@@ -25,8 +27,8 @@ export const photosStore = {
         }
     },
     getters: {
-        fromSelectedAlbum: (state) => (id) => {
-            return state.data.filter(photo => photo.albumId == id)
+        fromSelectedAlbum: (state) => (id:string) => {
+            return state.data.filter((photo:Photo) => photo.albumId == id)
         }
     }
 }
