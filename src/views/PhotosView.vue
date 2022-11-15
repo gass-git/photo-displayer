@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import {computed, watchEffect} from 'vue'
     import {useRoute} from 'vue-router'
     import {useStore} from 'vuex'

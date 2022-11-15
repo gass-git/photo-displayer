@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import {computed, watch, ref} from 'vue'
     import {useStore} from 'vuex'
     import AppToast from '@/components/AppToast.vue'

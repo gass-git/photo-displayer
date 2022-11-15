@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import {defineProps, computed} from 'vue'
     import {useStore} from 'vuex'
 

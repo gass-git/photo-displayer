@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import {defineProps} from 'vue'
 
     const props = defineProps({text: String, path: String, border:Boolean})

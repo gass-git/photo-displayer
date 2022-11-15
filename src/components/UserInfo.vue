@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import {ref, watchEffect, watch, computed} from 'vue'
     import {useStore} from 'vuex'
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'

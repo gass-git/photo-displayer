@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
     import {computed} from 'vue'
     import {useStore} from 'vuex'

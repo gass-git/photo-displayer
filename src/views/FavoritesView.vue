@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import {computed, watchEffect, ref} from 'vue'
     import {useStore} from 'vuex'
     import ViewLayout from '@/layouts/ViewLayout.vue'
