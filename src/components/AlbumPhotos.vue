@@ -9,7 +9,7 @@
         albumPhotos = computed(() => store.getters['photos/fromSelectedAlbum'](props.selectedAlbumId));
     
     function handlePhotoClick(photo){
-        let idFound = favoritePhotos.value.ids.some(id => id == photo.id)
+        let idFound = favoritePhotos.value.ids.some((id:string) => id == photo.id)
        
         if(idFound) 
             store.dispatch('user/removeFavoritePhoto', photo.id);

@@ -5,7 +5,7 @@
     const route = useRoute()
     const props = defineProps({ albumId: Number, albumTitle: String })
     
-    const isSelected = computed(() => props.albumId == route.params.albumId)
+    const isSelected = computed(() => props.albumId === Number(route.params.albumId))
     const path = computed(() => '/photos/' + props.albumId)
 </script>
 

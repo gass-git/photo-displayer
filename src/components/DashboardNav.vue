@@ -4,7 +4,7 @@
 
     const props = defineProps({option: String})
 
-    function handleClass(element){
+    function handleClass(element:string){
         if(element === props.option) return 'selected'
         else return 'non-selected'
     }

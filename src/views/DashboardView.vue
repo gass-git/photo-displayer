@@ -21,7 +21,7 @@
             router.go(-1)
     })
 
-    function switcher(option){
+    function switcher(option:string | string[]){
         switch(option){
             case 'settings': 
                 navOption.value = 'settings'
