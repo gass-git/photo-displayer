@@ -1,3 +1,8 @@
+interface S{
+    show:boolean,
+    appFirstRender:boolean
+}
+
 export const utilsStore = {
     namespaced: true,
     state(){
@@ -7,18 +12,18 @@ export const utilsStore = {
           }
     },
     mutations: {
-        setShow(state, bool:boolean){
+        setShow(state:S, bool:boolean){
             state.show = bool
         },
-        setAppFirstRenderOff(state){
+        setAppFirstRenderOff(state:S){
             state.appFirstRender = false
         }
     },
     getters: {
-        isAppFirstRender(state){
+        isAppFirstRender(state:S){
             return state.appFirstRender
         },
-        show(state){
+        show(state:S){
             return state.show
         }
     }
