@@ -3,6 +3,18 @@ import {signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {setDoc, doc} from 'firebase/firestore'
 
+interface S{
+    data: object | null,
+    isReady: boolean,
+    loginError: boolean | null,
+    registrationError: boolean | null
+}
+
+interface registrationData{
+    email: string,
+    password: string
+}
+
 export const authStore = {
     namespaced: true,
     state(){
@@ -14,27 +26,27 @@ export const authStore = {
         }
     },
     mutations:{
-        setData(state, payload:any){
+        setData(state:S, payload:any){
             state.data = payload
         },
-        setToReady(state, payload:any){
+        setToReady(state:S, payload:any){
             state.isReady = payload
         },
-        setLoginError(state, payload:any){
+        setLoginError(state:S, payload:any){
             state.loginError = payload
         },
-        resetLoginError(state){
+        resetLoginError(state:S){
             state.loginError = null
         },
-        setRegistrationError(state, payload:any){
+        setRegistrationError(state:S, payload:any){
             state.registrationError = payload
         },
-        resetRegistrationError(state){
+        resetRegistrationError(state:S){
             state.registrationError = null
         }
     },
     actions:{
-        async registerUser(context, {email, password}){
+        async registerUser(context:any, {email, password}: registrationData){
             context.commit('resetRegistrationError')
 
             try{
@@ -59,11 +71,11 @@ export const authStore = {
                     }
                 })
             }
-            catch (error){
+            catch (error:any){
                 context.commit('setRegistrationError', error.code)
             }
         },
-        async loginUser(context, {email, password}){
+        async loginUser(context:any, {email, password}: registrationData){
             context.commit('resetLoginError')
 
             try{
@@ -72,23 +84,23 @@ export const authStore = {
                 context.commit('setData', userAuthData) 
                 context.dispatch('user/load', res.user.uid, {root: true})
             }
-            catch (error){
+            catch (error:any){
                 context.commit('setLoginError', error.code)
             }
         },
-        async logoutUser(context){
+        async logoutUser(context:any){
             try{
                 await signOut(auth)
                 context.commit('setData', null)
                 context.commit('user/resetAll', null, {root:true})
             }
-            catch (error){
+            catch (error:any){
                 console.log(error.message)
             }
         }
     },
     getters:{
-        userIsLogged(state){
+        userIsLogged(state:S){
             return state.data ? true : false
         }
     }

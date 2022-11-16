@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {defineProps, computed} from 'vue'
+    import {computed, defineProps} from 'vue'
     import {useStore} from 'vuex'
     import Photo from '@/types/photo'
 

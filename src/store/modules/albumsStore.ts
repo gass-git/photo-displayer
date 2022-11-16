@@ -1,4 +1,7 @@
-import Album from '@/types/album'
+interface S{
+    data: Object[],
+    selectedId: number
+}
 
 export const albumsStore = {
     namespaced: true,
@@ -9,15 +12,15 @@ export const albumsStore = {
           }
     },
     mutations: {
-        setData(state, data){
+        setData(state:S, data:object[]){
             state.data = data
         },
-        updateSelectedId(state, id:number){
+        updateSelectedId(state:S, id:number){
             state.selectedId = id
         }
     },
     actions: {
-        async fetch(context){
+        async fetch(context: any){
             const API_URL = 'https://jsonplaceholder.typicode.com/albums'
 
             try{
@@ -33,9 +36,9 @@ export const albumsStore = {
         }
     },
     getters: {
-        title(state){
+        title(state:S){
             if(state.data.length > 0){
-                const album = state.data.find((album:Album) => album.id == state.selectedId)
+                const album:any = state.data.find((album:any) => album.id == state.selectedId)
                 return album.title
             }
             else{

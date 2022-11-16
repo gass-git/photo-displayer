@@ -2,6 +2,10 @@ import Photo from '@/types/photo'
 
 const PHOTOS_API = 'https://jsonplaceholder.typicode.com/photos'
 
+interface S{
+    data:object[]
+}
+
 export const photosStore = {
     namespaced: true,
     state(){
@@ -10,12 +14,12 @@ export const photosStore = {
         }
     },
     mutations: {
-        setData(state, payload: Photo){
+        setData(state:S, payload: Photo[]){
             state.data = payload
         }
     },
     actions: {
-        async fetch(context){
+        async fetch(context:any){
             try{
                 const resp = await fetch(PHOTOS_API)
                 const data = await resp.json()
@@ -27,8 +31,8 @@ export const photosStore = {
         }
     },
     getters: {
-        fromSelectedAlbum: (state) => (id:string) => {
-            return state.data.filter((photo:Photo) => photo.albumId == id)
+        fromSelectedAlbum: (state:S) => (id:string) => {
+            return state.data.filter((photo:any) => photo.albumId == id)
         }
     }
 }
