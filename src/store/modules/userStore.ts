@@ -1,5 +1,5 @@
 import {doc, updateDoc, arrayUnion, onSnapshot, arrayRemove} from 'firebase/firestore'
-import {db} from '@/firebase/config.js'
+import {db} from '@/firebase/config'
 
 interface S{
     uid: string,

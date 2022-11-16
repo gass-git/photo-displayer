@@ -5,7 +5,7 @@
     import AppName from '@/components/AppName.vue'
     import MenuOptions from '@/components/menuOptions/MenuOptions.vue'
     import {onAuthStateChanged} from 'firebase/auth'
-    import {auth} from '@/firebase/config.js'
+    import {auth} from '@/firebase/config'
 
     const store = useStore();
 

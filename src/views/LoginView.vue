@@ -2,7 +2,7 @@
     import {ref, computed} from 'vue'
     import {useStore} from 'vuex'
     import ViewLayout from '@/layouts/ViewLayout.vue'
-    import router from '@/router/index.js'
+    import router from '@/router/index'
 
     const 
         [store, email, password] = [useStore(), ref(''), ref('')],

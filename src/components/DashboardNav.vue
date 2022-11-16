@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import {defineProps} from 'vue'
-    import router from '@/router/index.js'
+    import router from '@/router/index'
 
     const props = defineProps({option: String})
 

@@ -1,7 +1,7 @@
 <script setup lang="ts"> 
     import {ref, computed} from 'vue'
     import {useStore} from 'vuex'
-    import router from '@/router/index.js'
+    import router from '@/router/index'
     import ViewLayout from '@/layouts/ViewLayout.vue'
 
     const 

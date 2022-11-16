@@ -7,7 +7,7 @@
     import UserInfo from '@/components/UserInfo.vue'
     import UserGreeting from '@/components/UserGreeting.vue'
     import DashboardNav from '@/components/DashboardNav.vue'
-    import router from '@/router/index.js'
+    import router from '@/router/index'
 
     const 
         [route, store, navOption] = [useRoute(), useStore(), ref('')],
