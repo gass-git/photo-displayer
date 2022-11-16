@@ -1,6 +1,19 @@
 import {doc, updateDoc, arrayUnion, onSnapshot, arrayRemove} from 'firebase/firestore'
 import {db} from '@/firebase/config.js'
 
+interface S{
+    uid: string,
+    favoritePhotos:{ids: string[]},
+    globalSettings:{albumsToShow: number},
+    information:object
+}
+
+interface userInfo{
+    username: string,
+    website: string,
+    about: string
+}
+
 export const userStore = {
     namespaced:true,
     state(){
@@ -20,19 +33,19 @@ export const userStore = {
         }
     },
     mutations:{
-        setUID(state, payload: any){
+        setUID(state:S, payload: any){
             state.uid = payload
         },
-        setFavoritePhotos(state, payload: any){
+        setFavoritePhotos(state:S, payload: any){
             state.favoritePhotos = payload
         },
-        setGlobalSettings(state, payload: any){
+        setGlobalSettings(state:S, payload: any){
             state.globalSettings = payload
         },
-        setInfo(state, payload: any){
+        setInfo(state:S, payload: any){
             state.information = payload
         },
-        resetAll(state){
+        resetAll(state:S){
             state.uid = ''
             state.favoritePhotos = {ids: []}
             state.globalSettings = {albumsToShow: 50},
@@ -40,41 +53,41 @@ export const userStore = {
         }
     },
     actions:{
-        async load(context, uid:string){
+        async load(context:any, uid:string){
             context.commit('setUID', uid)
 
             try{   
                 onSnapshot(doc(db, 'users', context.state.uid), (doc) => {
-                    context.commit('setFavoritePhotos', doc.data().favoritePhotos)
-                    context.commit('setGlobalSettings', doc.data().globalSettings)
-                    context.commit('setInfo', doc.data().information)
+                    context.commit('setFavoritePhotos', doc.data()?.favoritePhotos)
+                    context.commit('setGlobalSettings', doc.data()?.globalSettings)
+                    context.commit('setInfo', doc.data()?.information)
                 })
             }
             catch (error){
-                console.log(error.message)
+                console.log(error)
             }
         },
-        async addFavoritePhoto(context, photoId:string){
+        async addFavoritePhoto(context:any, photoId:string){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "favoritePhotos.ids": arrayUnion(photoId)
                 })
             }
             catch (error){
-                console.log(error.message)
+                console.log(error)
             }
         },
-        async removeFavoritePhoto(context, photoId:string){
+        async removeFavoritePhoto(context:any, photoId:string){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "favoritePhotos.ids": arrayRemove(photoId)
                 })
             }
             catch (error){
-                console.log(error.message)
+                console.log(error)
             }
         },
-        async updateAlbumsToShow(context, quantity:number){
+        async updateAlbumsToShow(context:any, quantity:number){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "globalSettings.albumsToShow": quantity
@@ -84,7 +97,7 @@ export const userStore = {
                 console.log(error)
             }
         },
-        async updateInformation(context, {username, website, about}){
+        async updateInformation(context:any, {username, website, about}:userInfo){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), { 
                     "information.username": username,
@@ -98,10 +111,10 @@ export const userStore = {
         }
     },
     getters:{
-        albumsToShow(state){
+        albumsToShow(state:S){
             return state.globalSettings.albumsToShow
         },
-        information(state){
+        information(state:S){
             return state.information
         }
     }
