@@ -8,7 +8,7 @@ interface S{
 
 export const photosStore = {
     namespaced: true,
-    state(){
+    state():S{
         return {
             data:[]
         }
@@ -21,8 +21,9 @@ export const photosStore = {
     actions: {
         async fetch(context:any){
             try{
-                const resp = await fetch(PHOTOS_API)
-                const data = await resp.json()
+                const 
+                    resp = await fetch(PHOTOS_API),
+                    data = await resp.json();
                 context.commit('setData', data)
             }
             catch (error) {

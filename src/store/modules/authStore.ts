@@ -17,7 +17,7 @@ interface registrationData{
 
 export const authStore = {
     namespaced: true,
-    state(){
+    state():S{
         return {
             data: null,
             isReady: false,
@@ -26,22 +26,22 @@ export const authStore = {
         }
     },
     mutations:{
-        setData(state:S, payload:any){
+        setData(state:S, payload:any):void{
             state.data = payload
         },
-        setToReady(state:S, payload:any){
+        setToReady(state:S, payload:any):void{
             state.isReady = payload
         },
-        setLoginError(state:S, payload:any){
+        setLoginError(state:S, payload:any):void{
             state.loginError = payload
         },
-        resetLoginError(state:S){
+        resetLoginError(state:S):void{
             state.loginError = null
         },
-        setRegistrationError(state:S, payload:any){
+        setRegistrationError(state:S, payload:any):void{
             state.registrationError = payload
         },
-        resetRegistrationError(state:S){
+        resetRegistrationError(state:S):void{
             state.registrationError = null
         }
     },
@@ -71,8 +71,8 @@ export const authStore = {
                     }
                 })
             }
-            catch (error:any){
-                context.commit('setRegistrationError', error.code)
+            catch (error){
+                context.commit('setRegistrationError', error)
             }
         },
         async loginUser(context:any, {email, password}: registrationData){
@@ -84,8 +84,8 @@ export const authStore = {
                 context.commit('setData', userAuthData) 
                 context.dispatch('user/load', res.user.uid, {root: true})
             }
-            catch (error:any){
-                context.commit('setLoginError', error.code)
+            catch (error){
+                context.commit('setLoginError', error)
             }
         },
         async logoutUser(context:any){
@@ -94,13 +94,13 @@ export const authStore = {
                 context.commit('setData', null)
                 context.commit('user/resetAll', null, {root:true})
             }
-            catch (error:any){
-                console.log(error.message)
+            catch (error){
+                console.log(error)
             }
         }
     },
     getters:{
-        userIsLogged(state:S){
+        userIsLogged(state:S): true | false{
             return state.data ? true : false
         }
     }
