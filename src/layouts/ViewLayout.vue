@@ -5,15 +5,14 @@
     import DashboardButton from '@/components/buttons/DashboardButton.vue';
     import FavoriteButton from '@/components/buttons/FavoritesButton.vue'
     import HeaderButton from '@/components/HeaderButton.vue'
-
-    const store = useStore()
     
     const
-        userIsLogged = computed(() => store.getters['auth/userIsLogged']),
-        userIsNotLogged = computed(() => !userIsLogged.value),
-        authIsReady = computed(() => store.state.auth.isReady);
+        store = useStore(),
+        userIsLogged = computed<boolean>(() => store.getters['auth/userIsLogged']),
+        userIsNotLogged = computed<boolean>(() => !userIsLogged.value),
+        authIsReady = computed<boolean>(() => store.state.auth.isReady);
 
-    function handleLogout(){
+    function handleLogout():void{
         store.dispatch('auth/logoutUser')
     }
 </script>
