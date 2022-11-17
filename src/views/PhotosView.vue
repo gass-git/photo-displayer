@@ -32,7 +32,7 @@
         <template v-slot:main-content>
             <AlbumPhotos 
                 :userIsLogged="userIsLogged"
-                :selectedAlbumId?="route.params.albumId"
+                :selectedAlbumId="route.params.albumId"
             />
         </template>
     </ViewLayout>

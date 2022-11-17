@@ -87,7 +87,7 @@ export const userStore = {
                 console.log(error)
             }
         },
-        async updateAlbumsToShow(context:any, quantity:number){
+        async updateAlbumsToShow(context:any, quantity: 20 | 30 | 50){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "globalSettings.albumsToShow": quantity

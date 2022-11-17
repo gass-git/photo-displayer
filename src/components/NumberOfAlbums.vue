@@ -13,7 +13,7 @@
 
     const albumsToShow = computed({
         get: () => numberOfAlbumsToShow.value,
-        set: (quantity) => store.dispatch('user/updateAlbumsToShow', Number(quantity))
+        set: (quantity: 20 | 30 | 50) => store.dispatch('user/updateAlbumsToShow', Number(quantity))
     })
 
     watch(() => numberOfAlbumsToShow.value, () => {
