@@ -5,17 +5,17 @@ interface S{
 
 export const albumsStore = {
     namespaced: true,
-    state(){
+    state():S{
         return {
             data:[],
-            selectedId: 1
+            selectedId:1
           }
     },
     mutations: {
-        setData(state:S, data:object[]){
+        setData(state:S, data:object[]):void{
             state.data = data
         },
-        updateSelectedId(state:S, id:number){
+        updateSelectedId(state:S, id:number):void{
             state.selectedId = id
         }
     },
@@ -36,7 +36,7 @@ export const albumsStore = {
         }
     },
     getters: {
-        title(state:S){
+        title(state:S):string{
             if(state.data.length > 0){
                 const album:any = state.data.find((album:any) => album.id == state.selectedId)
                 return album.title
