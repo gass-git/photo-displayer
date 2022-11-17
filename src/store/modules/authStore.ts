@@ -2,22 +2,16 @@ import {auth,db} from '@/firebase/config'
 import {signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {setDoc, doc} from 'firebase/firestore'
+import AuthState from '@/types/authState'
 
-interface S{
-    data: object | null,
-    isReady: boolean,
-    loginError: boolean | null,
-    registrationError: boolean | null
-}
-
-interface registrationData{
+interface RegistrationData{
     email: string,
     password: string
 }
 
 export const authStore = {
     namespaced: true,
-    state():S{
+    state():AuthState{
         return {
             data: null,
             isReady: false,
@@ -26,27 +20,27 @@ export const authStore = {
         }
     },
     mutations:{
-        setData(state:S, payload:any):void{
+        setData(state:AuthState, payload:any):void{
             state.data = payload
         },
-        setToReady(state:S, payload:any):void{
+        setToReady(state:AuthState, payload:any):void{
             state.isReady = payload
         },
-        setLoginError(state:S, payload:any):void{
+        setLoginError(state:AuthState, payload:any):void{
             state.loginError = payload
         },
-        resetLoginError(state:S):void{
+        resetLoginError(state:AuthState):void{
             state.loginError = null
         },
-        setRegistrationError(state:S, payload:any):void{
+        setRegistrationError(state:AuthState, payload:any):void{
             state.registrationError = payload
         },
-        resetRegistrationError(state:S):void{
+        resetRegistrationError(state:AuthState):void{
             state.registrationError = null
         }
     },
     actions:{
-        async registerUser(context:any, {email, password}: registrationData){
+        async registerUser(context:any, {email, password}: RegistrationData){
             context.commit('resetRegistrationError')
 
             try{
@@ -75,7 +69,7 @@ export const authStore = {
                 context.commit('setRegistrationError', error)
             }
         },
-        async loginUser(context:any, {email, password}: registrationData){
+        async loginUser(context:any, {email, password}:RegistrationData){
             context.commit('resetLoginError')
 
             try{
@@ -100,7 +94,7 @@ export const authStore = {
         }
     },
     getters:{
-        userIsLogged(state:S): true | false{
+        userIsLogged(state:AuthState): true | false{
             return state.data ? true : false
         }
     }

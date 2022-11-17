@@ -1,29 +1,26 @@
-interface S{
-    show:boolean,
-    appFirstRender:boolean
-}
+import UtilsState from '@/types/utilsState'
 
 export const utilsStore = {
     namespaced: true,
-    state(){
+    state():UtilsState{
         return {
             show: true,
             appFirstRender: true
           }
     },
     mutations: {
-        setShow(state:S, bool:boolean){
+        setShow(state:UtilsState, bool:boolean):void{
             state.show = bool
         },
-        setAppFirstRenderOff(state:S){
+        setAppFirstRenderOff(state:UtilsState):void{
             state.appFirstRender = false
         }
     },
     getters: {
-        isAppFirstRender(state:S){
+        isAppFirstRender(state:UtilsState):boolean{
             return state.appFirstRender
         },
-        show(state:S){
+        show(state:UtilsState):boolean{
             return state.show
         }
     }

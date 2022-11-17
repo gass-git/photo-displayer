@@ -2,7 +2,7 @@
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
     import {computed} from 'vue'
     import {useStore} from 'vuex'
-    import User from '@/types/user'
+    import User from '@/types/userState'
 
     const 
         store = useStore(),

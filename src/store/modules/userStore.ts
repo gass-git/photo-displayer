@@ -1,22 +1,11 @@
 import {doc, updateDoc, arrayUnion, onSnapshot, arrayRemove} from 'firebase/firestore'
 import {db} from '@/firebase/config'
-
-interface S{
-    uid: string,
-    favoritePhotos:{ids: string[]},
-    globalSettings:{albumsToShow: number},
-    information:object
-}
-
-interface userInfo{
-    username: string,
-    website: string,
-    about: string
-}
+import UserState from '@/types/userState'
+import UserInfo from '@/types/userInfo'
 
 export const userStore = {
     namespaced:true,
-    state(){
+    state():UserState{
         return {
             uid:'',
             favoritePhotos: {
@@ -33,19 +22,19 @@ export const userStore = {
         }
     },
     mutations:{
-        setUID(state:S, payload: any){
+        setUID(state:UserState, payload: any){
             state.uid = payload
         },
-        setFavoritePhotos(state:S, payload: any){
+        setFavoritePhotos(state:UserState, payload: any){
             state.favoritePhotos = payload
         },
-        setGlobalSettings(state:S, payload: any){
+        setGlobalSettings(state:UserState, payload: any){
             state.globalSettings = payload
         },
-        setInfo(state:S, payload: any){
+        setInfo(state:UserState, payload: any){
             state.information = payload
         },
-        resetAll(state:S){
+        resetAll(state:UserState){
             state.uid = ''
             state.favoritePhotos = {ids: []}
             state.globalSettings = {albumsToShow: 50},
@@ -97,7 +86,7 @@ export const userStore = {
                 console.log(error)
             }
         },
-        async updateInformation(context:any, {username, website, about}:userInfo){
+        async updateInformation(context:any, {username, website, about}:UserInfo){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), { 
                     "information.username": username,
@@ -111,10 +100,10 @@ export const userStore = {
         }
     },
     getters:{
-        albumsToShow(state:S){
+        albumsToShow(state:UserState){
             return state.globalSettings.albumsToShow
         },
-        information(state:S){
+        information(state:UserState){
             return state.information
         }
     }

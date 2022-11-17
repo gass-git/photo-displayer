@@ -1,4 +1,4 @@
-interface User{
+interface UserState{
     uid: string,
     favoritePhotos: {
         ids:number[]
@@ -13,4 +13,4 @@ interface User{
     }
 }
 
-export default User
+export default UserState

@@ -1,21 +1,19 @@
-interface S{
-    data: Object[],
-    selectedId: number
-}
+import {ActionContext} from 'vuex'
+import AlbumsState from '@/types/albumsState'
 
 export const albumsStore = {
     namespaced: true,
-    state():S{
+    state():AlbumsState{
         return {
             data:[],
             selectedId:1
           }
     },
     mutations: {
-        setData(state:S, data:object[]):void{
+        setData(state:AlbumsState, data:object[]):void{
             state.data = data
         },
-        updateSelectedId(state:S, id:number):void{
+        updateSelectedId(state:AlbumsState, id:number):void{
             state.selectedId = id
         }
     },
@@ -36,7 +34,7 @@ export const albumsStore = {
         }
     },
     getters: {
-        title(state:S):string{
+        title(state:AlbumsState):string{
             if(state.data.length > 0){
                 const album:any = state.data.find((album:any) => album.id == state.selectedId)
                 return album.title
