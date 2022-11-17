@@ -17,7 +17,7 @@
         about.value = store.state.user.information.about
     })
 
-    function handleUpdate(){
+    function handleUpdate():void{
         const newInfo = {
                 username: username.value,
                 website: website.value,
@@ -27,12 +27,9 @@
         store.dispatch('user/updateInformation', newInfo)
     }
 
-    function triggerToast(){
+    function triggerToast(): void{
         showToast.value = true
-
-        setTimeout(() => {
-            showToast.value = false
-        },2500)
+        setTimeout(() => showToast.value = false, 2500)
     }
 </script>
 

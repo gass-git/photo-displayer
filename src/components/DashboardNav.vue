@@ -2,9 +2,11 @@
     import {defineProps} from 'vue'
     import router from '@/router/index'
 
+    type className = 'selected' | 'non-selected'
+
     const props = defineProps({option: String})
 
-    function handleClass(element:string){
+    function handleClass(element:string):className{
         if(element === props.option) return 'selected'
         else return 'non-selected'
     }

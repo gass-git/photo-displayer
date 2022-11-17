@@ -7,20 +7,23 @@
     const
         options = [20, 30, 50],
         store = useStore(),
-        showToast = ref(false),
-        isAppFirstRender = computed(() => store.getters['utils/isAppFirstRender']),
-        numberOfAlbumsToShow = computed(() => store.state.user.globalSettings.albumsToShow);
+        showToast = ref(false);
 
-    const albumsToShow = computed({
-        get: () => numberOfAlbumsToShow.value,
-        set: (quantity: 20 | 30 | 50) => store.dispatch('user/updateAlbumsToShow', Number(quantity))
-    })
+    const    
+        isAppFirstRender = computed<boolean>(() => store.getters['utils/isAppFirstRender']),
+        numberOfAlbumsToShow = computed<20|30|50>(() => store.state.user.globalSettings.albumsToShow);
+
+    const 
+        albumsToShow = computed({
+            get: () => numberOfAlbumsToShow.value,
+            set: (quantity) => store.dispatch('user/updateAlbumsToShow', Number(quantity))
+        })
 
     watch(() => numberOfAlbumsToShow.value, () => {
         isAppFirstRender.value ? null : triggerToast()
     })
     
-    function triggerToast(){
+    function triggerToast():void{
         showToast.value = true
         
         setTimeout(() => {
