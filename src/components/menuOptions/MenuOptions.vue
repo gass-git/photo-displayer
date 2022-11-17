@@ -3,13 +3,14 @@
     import {useStore} from 'vuex'
     import AlbumButton from '@/components/menuOptions/children/AlbumButton.vue'
     import FavoritesOption from './children/FavoritesOption.vue'
+    import Album from '@/types/album'
 
     const 
         store = useStore(),
-        userIsLogged = computed(() => store.getters['auth/userIsLogged']);
+        userIsLogged = computed<boolean>(() => store.getters['auth/userIsLogged']);
     
     const 
-        albumsToShow = computed(() => {
+        albumsToShow = computed<Album[]>(() => {
             return store.state.albums.data.slice(0, store.getters['user/albumsToShow'])
         })
 </script>

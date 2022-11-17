@@ -2,11 +2,11 @@
     import { defineProps, computed} from 'vue'
     import { useRoute } from 'vue-router'
 
-    const route = useRoute()
-    const props = defineProps({ albumId: Number, albumTitle: String })
-    
-    const isSelected = computed(() => props.albumId === Number(route.params.albumId))
-    const path = computed(() => '/photos/' + props.albumId)
+    const 
+        route = useRoute(),
+        props = defineProps({ albumId: Number, albumTitle: String }),
+        isSelected = computed(() => props.albumId === Number(route.params.albumId)),
+        path = computed(() => '/photos/' + props.albumId);
 </script>
 
 <template>

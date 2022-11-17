@@ -3,10 +3,11 @@
     import {computed} from 'vue'
     import {useRoute} from 'vue-router'
 
-    const route = useRoute()
-    const store = useStore()
-    const favorites = computed(() => store.state.user.favoritePhotos.ids)
-    const isSelected = computed(() => route.path == '/favorites')
+    const 
+        route = useRoute(),
+        store = useStore(),
+        favorites = computed<number[]>(() => store.state.user.favoritePhotos.ids),
+        isSelected = computed(() => route.path == '/favorites');
 </script>
 
 <template>
