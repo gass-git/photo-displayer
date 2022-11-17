@@ -2,7 +2,11 @@ import {auth,db} from '@/firebase/config'
 import {signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {setDoc, doc} from 'firebase/firestore'
+import {ActionContext} from 'vuex'
+import {State} from '../index'
 import AuthState from '@/types/authState'
+
+type Ctx = ActionContext<AuthState, State>
 
 interface RegistrationData{
     email: string,
@@ -40,7 +44,7 @@ export const authStore = {
         }
     },
     actions:{
-        async registerUser(context:any, {email, password}: RegistrationData){
+        async registerUser(context:Ctx, {email, password}: RegistrationData){
             context.commit('resetRegistrationError')
 
             try{
@@ -69,7 +73,7 @@ export const authStore = {
                 context.commit('setRegistrationError', error)
             }
         },
-        async loginUser(context:any, {email, password}:RegistrationData){
+        async loginUser(context:Ctx, {email, password}:RegistrationData){
             context.commit('resetLoginError')
 
             try{
@@ -82,7 +86,7 @@ export const authStore = {
                 context.commit('setLoginError', error)
             }
         },
-        async logoutUser(context:any){
+        async logoutUser(context:Ctx){
             try{
                 await signOut(auth)
                 context.commit('setData', null)

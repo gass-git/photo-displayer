@@ -1,5 +1,8 @@
 import {ActionContext} from 'vuex'
+import {State} from '../index'
 import AlbumsState from '@/types/albumsState'
+
+type Ctx = ActionContext<AlbumsState, State>
 
 export const albumsStore = {
     namespaced: true,
@@ -18,7 +21,7 @@ export const albumsStore = {
         }
     },
     actions: {
-        async fetch(context: any){
+        async fetch(context:Ctx){
             const API_URL = 'https://jsonplaceholder.typicode.com/albums'
 
             try{
@@ -26,7 +29,6 @@ export const albumsStore = {
                 const data = await response.json()
 
                 context.commit('setData', data)
-                context.state.fetched = true
             }
             catch (error){
                 console.log(error)

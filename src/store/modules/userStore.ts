@@ -1,7 +1,11 @@
+import {ActionContext} from 'vuex'
+import {State} from '../index'
 import {doc, updateDoc, arrayUnion, onSnapshot, arrayRemove} from 'firebase/firestore'
 import {db} from '@/firebase/config'
 import UserState from '@/types/userState'
 import UserInfo from '@/types/userInfo'
+
+type Ctx = ActionContext<UserState, State>
 
 export const userStore = {
     namespaced:true,
@@ -42,7 +46,7 @@ export const userStore = {
         }
     },
     actions:{
-        async load(context:any, uid:string){
+        async load(context:Ctx, uid:string){
             context.commit('setUID', uid)
 
             try{   
@@ -56,7 +60,7 @@ export const userStore = {
                 console.log(error)
             }
         },
-        async addFavoritePhoto(context:any, photoId:string){
+        async addFavoritePhoto(context:Ctx, photoId:string){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "favoritePhotos.ids": arrayUnion(photoId)
@@ -66,7 +70,7 @@ export const userStore = {
                 console.log(error)
             }
         },
-        async removeFavoritePhoto(context:any, photoId:string){
+        async removeFavoritePhoto(context:Ctx, photoId:string){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "favoritePhotos.ids": arrayRemove(photoId)
@@ -76,7 +80,7 @@ export const userStore = {
                 console.log(error)
             }
         },
-        async updateAlbumsToShow(context:any, quantity: 20 | 30 | 50){
+        async updateAlbumsToShow(context:Ctx, quantity: 20 | 30 | 50){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), {
                     "globalSettings.albumsToShow": quantity
@@ -86,7 +90,7 @@ export const userStore = {
                 console.log(error)
             }
         },
-        async updateInformation(context:any, {username, website, about}:UserInfo){
+        async updateInformation(context:Ctx, {username, website, about}:UserInfo){
             try{
                 await updateDoc(doc(db, 'users', context.state.uid), { 
                     "information.username": username,

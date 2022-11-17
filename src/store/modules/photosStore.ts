@@ -1,4 +1,8 @@
+import {ActionContext} from 'vuex'
+import {State} from '../index'
 import Photo from '@/types/photo'
+
+type Ctx = ActionContext<{data:object[]}, State>
 
 const PHOTOS_API = 'https://jsonplaceholder.typicode.com/photos'
 
@@ -15,7 +19,7 @@ export const photosStore = {
         }
     },
     actions: {
-        async fetch(context:any){
+        async fetch(context:Ctx){
             try{
                 const 
                     resp = await fetch(PHOTOS_API),
