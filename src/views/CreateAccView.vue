@@ -8,7 +8,7 @@
         store = useStore(),
         [email, password, repeatedPassword] = [ref(''), ref(''), ref('')],
         alert = ref({show: false, text: ''}),
-        registrationError = computed(() => store.state.auth.registrationError);
+        registrationError = computed<string>(() => store.state.auth.registrationError);
 
     const emailValid = computed<boolean>(() => {
         // eslint-disable-next-line
