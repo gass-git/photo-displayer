@@ -11,8 +11,8 @@
 
     const 
         [route, store, navOption] = [useRoute(), useStore(), ref('')],
-        authIsReady = computed(() => store.state.auth.isReady),
-        userIsLogged = computed(() => store.getters['auth/userIsLogged']);
+        authIsReady = computed<boolean>(() => store.state.auth.isReady),
+        userIsLogged = computed<boolean>(() => store.getters['auth/userIsLogged']);
 
     watchEffect(() => {
         if(userIsLogged.value)
@@ -21,7 +21,7 @@
             router.go(-1)
     })
 
-    function switcher(option:string | string[]){
+    function switcher(option:string | string[]):void{
         switch(option){
             case 'settings': 
                 navOption.value = 'settings'

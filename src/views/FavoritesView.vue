@@ -9,9 +9,9 @@
         favoritePhotos = ref<Photo[]>([]);
 
     const
-        photos = computed(() => store.state.photos.data),
-        idsOfFavorites = computed(() => store.state.user.favoritePhotos.ids),
-        authIsReady = computed(() => store.state.auth.isReady);
+        photos = computed<Photo[]>(() => store.state.photos.data),
+        idsOfFavorites = computed<number[]>(() => store.state.user.favoritePhotos.ids),
+        authIsReady = computed<boolean>(() => store.state.auth.isReady);
 
     watchEffect(() => {
         favoritePhotos.value = photos.value.filter((photo:Photo) => {

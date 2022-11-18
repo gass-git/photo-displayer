@@ -8,14 +8,14 @@
         store = useStore(),
         [email, password, repeatedPassword] = [ref(''), ref(''), ref('')],
         alert = ref({show: false, text: ''}),
-        registrationError = computed(() => store.state.auth.registrationError)
+        registrationError = computed(() => store.state.auth.registrationError);
 
-    const emailValid = computed(() => {
+    const emailValid = computed<boolean>(() => {
         // eslint-disable-next-line
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)
     })
 
-    const conditionsAreMet = computed(() => {
+    const conditionsAreMet = computed<boolean>(() => {
         if(
             emailValid.value
             &&

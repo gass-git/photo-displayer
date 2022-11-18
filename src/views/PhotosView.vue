@@ -9,9 +9,9 @@
     const [store, route] = [useStore(), useRoute()]
         
     const    
-        showAlert = computed(() => store.getters['utils/show']),
-        userIsLogged = computed(() => store.getters['auth/userIsLogged']),
-        albumTitle = computed(() => store.getters['albums/title']);
+        showAlert = computed<boolean>(() => store.getters['utils/show']),
+        userIsLogged = computed<boolean>(() => store.getters['auth/userIsLogged']),
+        albumTitle = computed<string>(() => store.getters['albums/title']);
 
     watchEffect(() => {
         store.commit('albums/updateSelectedId', route.params.albumId)

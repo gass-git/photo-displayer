@@ -6,7 +6,7 @@
 
     const 
         [store, email, password] = [useStore(), ref(''), ref('')],
-        loginError = computed(() => store.state.auth.loginError);
+        loginError = computed<boolean>(() => store.state.auth.loginError);
 
     async function submit(){
         const credentials = {email: email.value, password: password.value}
