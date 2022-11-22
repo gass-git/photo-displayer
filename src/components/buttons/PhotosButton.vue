@@ -3,9 +3,11 @@
     import {computed} from 'vue'
     import NavButtonLayout from '@/layouts/NavButtonLayout.vue'
 
-    const currentPath = computed(() => useRoute().path)
+    const 
+        route = useRoute(),
+        currentPath = computed(() => route.path);
 
-    function pathIsPhotos(){
+    function pathIsPhotos():boolean{
         return currentPath.value.includes('/photo') ? true : false
     }
 </script>
