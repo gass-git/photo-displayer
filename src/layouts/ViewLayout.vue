@@ -10,11 +10,8 @@
         store = useStore(),
         userIsLogged = computed<boolean>(() => store.getters['auth/userIsLogged']),
         userIsNotLogged = computed<boolean>(() => !userIsLogged.value),
-        authIsReady = computed<boolean>(() => store.state.auth.isReady);
-
-    function handleLogout():void{
-        store.dispatch('auth/logoutUser')
-    }
+        authIsReady = computed<boolean>(() => store.state.auth.isReady),
+        handleLogout: () => void = () => store.dispatch('auth/logoutUser');
 </script>
 
 <template>
