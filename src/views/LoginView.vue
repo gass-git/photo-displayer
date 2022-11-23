@@ -8,8 +8,10 @@
         [store, email, password] = [useStore(), ref(''), ref('')],
         loginError = computed<string>(() => store.state.auth.loginError);
 
-    async function submit(){
-        const credentials = {email: email.value, password: password.value}
+    async function submit():Promise<void>{
+        interface Credentials{email:string, password:string}
+
+        const credentials:Credentials = {email: email.value, password: password.value}
         
         await store.dispatch('auth/loginUser', credentials)
         loginError.value ? null : router.push('/dashboard')

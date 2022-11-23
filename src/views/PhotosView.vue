@@ -5,10 +5,9 @@
     import ViewLayout from '@/layouts/ViewLayout.vue'
     import AppAlert from '@/components/AppAlert.vue'
     import AlbumPhotos from '@/components/AlbumPhotos.vue'
-
-    const [store, route] = [useStore(), useRoute()]
         
     const    
+        [store, route] = [useStore(), useRoute()],
         showAlert = computed<boolean>(() => store.getters['utils/show']),
         userIsLogged = computed<boolean>(() => store.getters['auth/userIsLogged']),
         albumTitle = computed<string>(() => store.getters['albums/title']);

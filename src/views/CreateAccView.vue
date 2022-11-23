@@ -32,7 +32,7 @@
         }
     })
 
-    async function submit(){ 
+    async function submit(): Promise<void>{ 
         if(conditionsAreMet.value){
             const credentials = {email: email.value, password: password.value}
             
