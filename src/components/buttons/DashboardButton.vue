@@ -3,9 +3,11 @@
     import {computed} from 'vue'
     import NavButtonLayout from '@/layouts/NavButtonLayout.vue'
 
-    const currentPath = computed(() => useRoute().path)
+    const 
+        route = useRoute(),
+        currentPath = computed<string>(() => route.path);
 
-    function pathIsProfile(){
+    function pathIsProfile():boolean{
         return currentPath.value.slice(0,10) === '/dashboard' ? true : false
     }
 </script>

@@ -5,7 +5,7 @@
 
     const 
         route = useRoute(),
-        currentPath = computed(() => route.path);
+        currentPath = computed<string>(() => route.path);
 
     function pathIsPhotos():boolean{
         return currentPath.value.includes('/photo') ? true : false
