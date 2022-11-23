@@ -4,6 +4,9 @@
     import AppToast from '@/components/AppToast.vue'
     import WhiteWrapperLayout from '@/layouts/WhiteWrapperLayout.vue'
 
+    // union type for selection options
+    type N = 20 | 30 | 50
+
     const
         options = [20, 30, 50],
         store = useStore(),
@@ -11,7 +14,7 @@
 
     const    
         isAppFirstRender = computed<boolean>(() => store.getters['utils/isAppFirstRender']),
-        numberOfAlbumsToShow = computed<20|30|50>(() => store.state.user.globalSettings.albumsToShow);
+        numberOfAlbumsToShow = computed<N>(() => store.state.user.globalSettings.albumsToShow);
 
     const 
         albumsToShow = computed({

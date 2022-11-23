@@ -3,7 +3,6 @@
     import router from '@/router/index'
 
     type className = 'selected' | 'non-selected'
-
     const props = defineProps({option: String})
 
     function handleClass(element:string):className{
