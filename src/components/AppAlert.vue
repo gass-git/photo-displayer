@@ -1,11 +1,9 @@
 <script setup lang="ts">
     import {useStore} from 'vuex'
 
-    const store = useStore()
-
-    function handleCloseAlert(){
-        store.commit('utils/setShow', false)
-    }
+    const 
+        store = useStore(),
+        handleCloseAlert: () => void = () => store.commit('utils/setShow', false);
 </script>
 
 <template>
