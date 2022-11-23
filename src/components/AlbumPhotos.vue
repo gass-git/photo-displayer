@@ -5,12 +5,18 @@
 
     const
         store = useStore(),
-        props = defineProps({userIsLogged: Boolean, selectedAlbumId: String});
+        props = defineProps({userIsLogged: Boolean, selectedAlbumId: String}),
+        favoritePhotos = computed<{ids: number[]}>(() => store.state.user.favoritePhotos);
 
-    const favoritePhotos = computed<{ids: number[]}>(() => store.state.user.favoritePhotos);
-    const albumPhotos = computed<Photo[]>(() => store.getters['photos/fromSelectedAlbum'](props.selectedAlbumId));
+    const
+        albumPhotos = computed<Photo[]>(() => {
+            return store.getters['photos/fromSelectedAlbum'](props.selectedAlbumId)
+        });
     
-    function handlePhotoClick(photo:Photo):void{
+    let isFavorite: (photo:Photo) => boolean;
+    let handlePhotoClick: (photo:Photo) => void;
+
+    handlePhotoClick = (photo) => {
         let idFound:boolean = favoritePhotos.value.ids.some((id:number) => id === photo.id)
        
         if(idFound) 
@@ -19,8 +25,10 @@
             store.dispatch('user/addFavoritePhoto', photo.id);
     }
     
-    function isFavorite(photo:Photo):boolean{
-        let favoriteFound: number | undefined = favoritePhotos.value.ids.find((id:number) => id === photo.id)
+    isFavorite = (photo) => {
+        type R = number | undefined
+
+        let favoriteFound:R = favoritePhotos.value.ids.find((id:number) => id === photo.id)
         return favoriteFound ? true : false
     }
 </script>
